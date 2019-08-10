@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.KCDModToolbox.App", "TomLabs.KCDModToolbox.App\TomLabs.KCDModToolbox.App.csproj", "{2D8968F4-CE2C-40EF-A20D-D1848F8AF6D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.KCDModToolbox.Core", "TomLabs.KCDModToolbox.Core\TomLabs.KCDModToolbox.Core.csproj", "{57D476CB-03A4-4CF2-976D-C89A5B1DE497}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.WPF.Tools", "..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj", "{A4218889-B6D2-4627-B980-EFE0FCB7A129}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D8968F4-CE2C-40EF-A20D-D1848F8AF6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8968F4-CE2C-40EF-A20D-D1848F8AF6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8968F4-CE2C-40EF-A20D-D1848F8AF6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8968F4-CE2C-40EF-A20D-D1848F8AF6D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D476CB-03A4-4CF2-976D-C89A5B1DE497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D476CB-03A4-4CF2-976D-C89A5B1DE497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D476CB-03A4-4CF2-976D-C89A5B1DE497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D476CB-03A4-4CF2-976D-C89A5B1DE497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4218889-B6D2-4627-B980-EFE0FCB7A129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4218889-B6D2-4627-B980-EFE0FCB7A129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4218889-B6D2-4627-B980-EFE0FCB7A129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4218889-B6D2-4627-B980-EFE0FCB7A129}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E0B600B-9774-4640-B95B-50AE36882249}
+	EndGlobalSection
+EndGlobal
