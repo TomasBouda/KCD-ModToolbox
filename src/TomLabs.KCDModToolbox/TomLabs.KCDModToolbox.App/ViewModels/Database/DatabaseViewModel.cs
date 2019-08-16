@@ -2,7 +2,7 @@
 using TomLabs.KCDModToolbox.Core;
 using TomLabs.WPF.Tools;
 
-namespace TomLabs.KCDModToolbox.App.ViewModels
+namespace TomLabs.KCDModToolbox.App.ViewModels.Database
 {
 	public class DatabaseViewModel : BaseViewModel
 	{

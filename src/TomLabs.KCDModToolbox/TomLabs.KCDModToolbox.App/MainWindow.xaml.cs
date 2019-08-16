@@ -19,17 +19,6 @@ namespace TomLabs.KCDModToolbox.App
 
 			VM = new MainWindowViewModel();
 			DataContext = VM;
-			VM.Database.ShowTable("soul", true);
-
-
-			//var test = soulTable.Rows.FirstOrDefault(r => ((IDictionary<string, object>)r)["soul_name"].ToString().Contains("markvart"));
-			//dynamic test2 = soulTable.Rows.FirstOrDefault(r => ((dynamic)r).soul_name.ToString().Contains("markvart"));
-			//var test3 = soulTable.Columns
-			//	.FirstOrDefault(c => c.Name == "character_body_id")
-			//	.ReferenceTo
-			//	.LoadTableData()
-			//		.Rows
-			//		.FirstOrDefault(r => ((dynamic)r).character_body_id.ToString() == test2.character_body_id);
 		}
 
 	}

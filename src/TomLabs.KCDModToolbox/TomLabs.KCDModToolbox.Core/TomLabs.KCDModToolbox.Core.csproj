@@ -9,4 +9,8 @@
     <PackageReference Include="TomLabs.Shadowgem" Version="1.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Cheats\" />
+  </ItemGroup>
+
 </Project>

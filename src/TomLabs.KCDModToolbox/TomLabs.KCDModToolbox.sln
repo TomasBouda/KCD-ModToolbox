@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.KCDModToolbox.App",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.KCDModToolbox.Core", "TomLabs.KCDModToolbox.Core\TomLabs.KCDModToolbox.Core.csproj", "{57D476CB-03A4-4CF2-976D-C89A5B1DE497}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.WPF.Tools", "..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj", "{A4218889-B6D2-4627-B980-EFE0FCB7A129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.WPF.Tools", "..\..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj", "{A4218889-B6D2-4627-B980-EFE0FCB7A129}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

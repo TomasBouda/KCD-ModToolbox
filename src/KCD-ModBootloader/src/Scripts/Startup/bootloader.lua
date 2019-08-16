@@ -1,31 +1,25 @@
 bootloader={}
 
+Script.ReloadScript("Scripts/bootloader_utils.lua")
+
 function bootloader:load_file(filename)
-	System.LogAlways("$2Loading " .. tostring(filename))
+	bootloader:logVerbose("Loading %s", tostring(filename))
 	local chunk, err = loadfile(filename)
     if not err then
 		if pcall(function() chunk() end) then
-			System.LogAlways("$2Loaded " .. tostring(filename) .. " successfully")
-			-- print("ok")
+			bootloader:logVerbose("Loaded %s successfully", tostring(filename))
 		else
-			System.LogAlways("$6Some erros occured while loading " .. tostring(filename))
-			-- print("nok")
+			bootloader:logWarning("Some erros occured while loading %s", tostring(filename))
 		end
-    else
-		System.LogAlways("$3Failed to load " .. tostring(filename))
-		-- print("bnok")
+	else
+		bootloader:logError("Failed to load %s", tostring(filename))
     end
 end
 
-function bootloader:reload_all()
-	Script.ReloadScripts()
-end
-
-function bootloader:load_config()
-	System.LogAlways("$5Reading configuration file")
+function bootloader:load_mods()
+	bootloader:logDebug("Reading configuration file")
 
 	local file = io.open('mods\\KCD_Bootloader\\config.txt', "r");
-	-- local file = io.open('c:\\Program Files (x86)\\Steam\\steamapps\\common\\KingdomComeDeliverance\\mods\\KCD_Bootloader\\config.txt', "r");
 	if file == nil then return false end;
 		
 	while true do
@@ -39,14 +33,82 @@ function bootloader:load_config()
 	end
 	file:close();
 		
-	System.LogAlways("$3Configuration file loaded")
+	bootloader:logDebug("Configuration file loaded")
 	return true;
 end
 
-function cls()
-	System.ClearConsole()
+function bootloader:get_command()
+	local file = io.open('mods\\KCD_Bootloader\\invoke_command.txt', "rb");
+	if file == nil then return false end;
+	
+	local command = file:read("*all");
+	file:close();
+
+	return command;
 end
 
-System.LogAlways("$3KCD Bootloader initialized")
+function bootloader:execute_command(command)
+	local func = assert(loadstring(command));
+    func();
+end
 
-bootloader:load_config()
+function bootloader:execute_commands()
+	
+	local success, command = pcall(function() return bootloader:get_command() end)
+
+	if not success then
+		bootloader:logError("Failed to load command. %s", command)
+	else
+		if command ~= "" then
+			success, message = pcall(function(cmd) return bootloader:execute_command(command) end);
+			bootloader:logDebug("Command executed")
+
+			if not success then
+				bootloader:logError("Command execution failed!")
+				bootloader:command_log("[FAILED] " .. tostring(message));
+			else
+				bootloader:logDebug("Command execution succeeeded.")
+				bootloader:command_log("[SUCCESS] " .. tostring(message));
+			end
+		end
+	end
+end
+
+function bootloader:clear_commands()
+	local file = io.open('mods\\KCD_Bootloader\\invoke_command.txt', "w");
+    if file == nil then return end;
+	
+	file:write("");
+	file:close();
+end
+
+function bootloader:command_log(message)
+	local logfile = io.open('mods\\KCD_Bootloader\\command_log.txt', "a");
+	if logfile == nil then return {} end;
+	
+    logfile:write(message .. "\n");
+    logfile:close();
+end
+
+function bootloader:timerCallback(nTimerId)
+	bootloader:execute_commands()
+	bootloader:clear_commands()
+
+	Script.SetTimer(1000, function(nTimerId) bootloader:timerCallback(nTimerId) end)
+end
+
+function bootloader:uiActionListener(actionName, eventName, argTable)
+	if actionName == "sys_loadingimagescreen" and eventName == "OnEnd" then
+		bootloader:timerCallback(0)
+	end
+end
+UIAction.RegisterActionListener(bootloader, "", "", "uiActionListener")
+
+-- function bootloader:uiEventSystemListener(actionName, eventName, argTable)
+-- 	bootloader:timerCallback(0)
+-- end
+-- UIAction.RegisterEventSystemListener(bootloader, "", "", "uiEventSystemListener")
+
+bootloader:load_mods()
+
+bootloader:logInfo("KCD Bootloader initialized")

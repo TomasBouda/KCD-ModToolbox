@@ -3,7 +3,7 @@ using System.Windows.Input;
 using TomLabs.WPF.Tools;
 using TomLabs.WPF.Tools.Commands;
 
-namespace TomLabs.KCDModToolbox.App.ViewModels
+namespace TomLabs.KCDModToolbox.App.ViewModels.Database
 {
 	public class RowViewModel : BaseViewModel
 	{

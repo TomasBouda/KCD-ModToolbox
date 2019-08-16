@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj" />
+    <ProjectReference Include="..\..\..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj" />
     <ProjectReference Include="..\TomLabs.KCDModToolbox.Core\TomLabs.KCDModToolbox.Core.csproj" />
   </ItemGroup>
 

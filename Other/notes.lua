@@ -55,3 +55,27 @@ C:\Program Files (x86)\Steam\steamapps\common\KingdomComeDeliverance\Data\Script
 
 #bootloader:load_file("mods/KCD_Bootloader/Scripts/cheat_util.lua")
 #Script.ReloadScript("mods/KCD_Bootloader/Scripts/cheat_util.lua")
+
+C:/Data/GIT/KCD-Cheat/Source/Scripts/Startup/main.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_util.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_localization.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_args.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_debug.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_stubs.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_console.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_buffs.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_factions.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_horses.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_items.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_merchants.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_perks.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_physics.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_picking.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_player.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_skills.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_quests.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_map.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_time.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_npc.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_weather.lua
+C:/Data/GIT/KCD-Cheat/Source/Scripts/cheat_core_exec.lua
