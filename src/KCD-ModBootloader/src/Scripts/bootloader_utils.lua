@@ -24,30 +24,30 @@ end
 
 function bootloader:logVerbose(message, ...)
 	if bootloader.log_level_verbose >= bootloader.log_level then
-		bootloader:log(string.format("$2[VRB] ".. message, ...))
+		bootloader:log(string.format("$2[VERBOSE] ".. message, ...))
 	end
 end
 
 function bootloader:logDebug(message, ...)
 	if bootloader.log_level_debug >= bootloader.log_level then
-		bootloader:log(string.format("$3[DBG] ".. message, ...))
+		bootloader:log(string.format("$3[DEBUG] ".. message, ...))
 	end
 end
 
 function bootloader:logInfo(message, ...)
 	if bootloader.log_level_info >= bootloader.log_level then
-		bootloader:log(string.format("$5[INF] ".. message, ...))
+		bootloader:log(string.format("$5[INFO] ".. message, ...))
 	end
 end
 
 function bootloader:logWarning(message, ...)
 	if bootloader.log_level_warning >= bootloader.log_level then
-		bootloader:log(string.format("$6[WRN] ".. message, ...))
+		bootloader:log(string.format("$6[WARNING] ".. message, ...))
 	end
 end
 
 function bootloader:logError(message, ...)
 	if bootloader.log_level_error >= bootloader.log_level then
-		bootloader:log(string.format("$4[ERR] ".. message, ...))
+		bootloader:log(string.format("$4[ERROR] ".. message, ...))
 	end
 end
