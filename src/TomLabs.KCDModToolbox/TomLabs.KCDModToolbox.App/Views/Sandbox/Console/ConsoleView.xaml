@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="TomLabs.KCDModToolbox.App.Views.Sandbox.Console.ConsoleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="clr-namespace:TomLabs.KCDModToolbox.App.Controls.Behaviours"
+    xmlns:cvt="clr-namespace:TomLabs.KCDModToolbox.App.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContextChanged="UserControl_DataContextChanged"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <cvt:ColorToBrushConverter x:Key="CTBConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer
+            Name="Scroller"
+            Margin="0"
+            Background="Black"
+            FontFamily="Consolas"
+            FontSize="15"
+            Foreground="Yellow"
+            VirtualizingPanel.IsVirtualizing="True">
+            <ScrollViewer.Resources>
+                <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">15</sys:Double>
+            </ScrollViewer.Resources>
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding ConsoleOutput.Entries, Mode=OneWay}" MouseDown="ItemsControl_MouseDown">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Margin="5,1,0,0" Text="{Binding Created, StringFormat=HH:mm:ss}" />
+                                <TextBox
+                                    Margin="8,0,0,0"
+                                    Background="Black"
+                                    BorderThickness="0"
+                                    Foreground="{Binding Foreground, Converter={StaticResource CTBConverter}}"
+                                    IsReadOnly="True"
+                                    SelectionBrush="Red"
+                                    Text="{Binding CommandText, Mode=OneWay}"
+                                    ToolTip="{Binding CommandText, Mode=OneWay}" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <DockPanel Margin="2" LastChildFill="True">
+                    <TextBlock Text="&gt;" />
+                    <TextBox
+                        Name="txtConsoleInput"
+                        Background="Black"
+                        BorderThickness="0"
+                        Foreground="Yellow"
+                        KeyDown="txtConsoleInput_KeyDown"
+                        PreviewKeyUp="TxtConsoleInput_PreviewKeyUp"
+                        SelectionBrush="Red"
+                        Text="{Binding ConsoleInput.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding RunCommandCmd}" />
+                            <KeyBinding Key="Up" Command="{Binding InsertPreviousCommandCmd}" />
+                            <KeyBinding Key="Down" Command="{Binding InsertNextCommandCmd}" />
+                            <KeyBinding
+                                Key="C"
+                                Command="{Binding ClearInputCmd}"
+                                Modifiers="Ctrl" />
+                            <KeyBinding
+                                Key="Space"
+                                Command="{Binding SuggestCmd}"
+                                Modifiers="Ctrl" />
+                            <KeyBinding Key="Tab" Command="{Binding SuggestCmd}" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </DockPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TomLabs.KCDModToolbox.Core;
+using TomLabs.KCDModToolbox.Core.Database;
 using TomLabs.Shadowgem.Extensions.String;
 using TomLabs.WPF.Tools;
 using TomLabs.WPF.Tools.Commands;

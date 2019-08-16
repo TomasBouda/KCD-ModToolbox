@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 
-namespace TomLabs.KCDModToolbox.Core
+namespace TomLabs.KCDModToolbox.Core.Database
 {
 	public class DatabaseDescriptor
 	{

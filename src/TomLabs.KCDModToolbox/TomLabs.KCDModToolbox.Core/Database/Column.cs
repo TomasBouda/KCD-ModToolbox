@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TomLabs.KCDModToolbox.Core
+namespace TomLabs.KCDModToolbox.Core.Database
 {
 	public class Column
 	{

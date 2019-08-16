@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace TomLabs.KCDModToolbox.App
 {
@@ -7,5 +8,9 @@ namespace TomLabs.KCDModToolbox.App
 	/// </summary>
 	public partial class App : Application
 	{
+		public static void RunOnUIThread(Action action)
+		{
+			Current.Dispatcher.Invoke(action);
+		}
 	}
 }

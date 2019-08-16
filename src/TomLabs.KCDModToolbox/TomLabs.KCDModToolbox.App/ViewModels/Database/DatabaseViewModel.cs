@@ -1,5 +1,5 @@
 ﻿using System;
-using TomLabs.KCDModToolbox.Core;
+using TomLabs.KCDModToolbox.Core.Database;
 using TomLabs.WPF.Tools;
 
 namespace TomLabs.KCDModToolbox.App.ViewModels.Database
