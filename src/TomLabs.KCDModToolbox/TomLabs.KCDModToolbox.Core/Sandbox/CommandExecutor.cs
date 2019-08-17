@@ -27,7 +27,7 @@ namespace TomLabs.KCDModToolbox.Core.Sandbox
 
 		private string KCDLogPath { get; set; }
 
-		private string BootloaderCommadnLogPath { get; set; }
+		private string BootloaderCommandLogPath { get; set; }
 
 		public LogWatcher LogWatcher { get; private set; }
 
@@ -38,7 +38,7 @@ namespace TomLabs.KCDModToolbox.Core.Sandbox
 			ScriptInjector.SetBridgeFilePath($@"{kcdDirectory}\mods\KCD_Bootloader\invoke_command.txt");
 
 			KCDLogPath = $@"{kcdDirectory}\kcd.log";
-			BootloaderCommadnLogPath = $@"{kcdDirectory}\mods\KCD_Bootloader\command_log.txt";
+			BootloaderCommandLogPath = $@"{kcdDirectory}\mods\KCD_Bootloader\command_log.txt";
 
 			LogWatcher = LogWatcher.CreateDefault(KCDLogPath);
 			LogWatcher.Start();
@@ -88,13 +88,13 @@ namespace TomLabs.KCDModToolbox.Core.Sandbox
 			return await Task.Run(() =>
 			{
 				// Flush command log
-				File.WriteAllText(BootloaderCommadnLogPath, string.Empty);
+				File.WriteAllText(BootloaderCommandLogPath, string.Empty);
 
 				ExecuteCommandText(commandText);
 
 				// Wait for command result inside command_log
 				int spentMS = 0;
-				var fileInfo = new FileInfo(BootloaderCommadnLogPath);
+				var fileInfo = new FileInfo(BootloaderCommandLogPath);
 				while (fileInfo.Length == 0)
 				{
 					Thread.Sleep(100);
@@ -107,10 +107,10 @@ namespace TomLabs.KCDModToolbox.Core.Sandbox
 					}
 				}
 
-				bool success = File.ReadAllText(BootloaderCommadnLogPath).Contains("[SUCCESS]");
+				bool success = File.ReadAllText(BootloaderCommandLogPath).Contains("[SUCCESS]");
 
 				// Flush command log
-				File.WriteAllText(BootloaderCommadnLogPath, string.Empty);
+				File.WriteAllText(BootloaderCommandLogPath, string.Empty);
 
 				return success;
 			});

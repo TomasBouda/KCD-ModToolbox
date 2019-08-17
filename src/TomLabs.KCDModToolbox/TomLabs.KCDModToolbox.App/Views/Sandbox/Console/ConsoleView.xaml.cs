@@ -25,5 +25,10 @@ namespace TomLabs.KCDModToolbox.App.Views.Sandbox.Console
 		{
 			Scroller.ScrollToBottom();
 		}
+
+		private void IcEntities_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+		{
+
+		}
 	}
 }

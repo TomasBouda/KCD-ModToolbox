@@ -58,6 +58,7 @@
                 <ItemsControl
                     x:Name="icEntities"
                     ItemsSource="{Binding ConsoleOutput.Entries, Mode=OneWay}"
+                    SourceUpdated="IcEntities_SourceUpdated"
                     VirtualizingPanel.IsVirtualizing="True">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

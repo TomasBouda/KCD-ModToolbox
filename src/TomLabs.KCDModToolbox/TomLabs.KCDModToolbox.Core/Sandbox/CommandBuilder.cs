@@ -16,5 +16,30 @@
 		{
 			return new Command($"cheat_set_time_speed ratio:{ratio}");
 		}
+
+		public static Command AddBuffImmortal()
+		{
+			return new Command("cheat_add_buff_immortal");
+		}
+
+		public static Command RemoveBuffImmortal()
+		{
+			return new Command("cheat_remove_buff_immortal");
+		}
+
+		public static Command AddBuffInvisible()
+		{
+			return new Command("cheat_add_buff_invisible");
+		}
+
+		public static Command RemoveBuffInvisible()
+		{
+			return new Command("cheat_remove_buff_invisible");
+		}
+
+		public static Command AddBuffHeal()
+		{
+			return new Command("cheat_add_buff_heal");
+		}
 	}
 }
