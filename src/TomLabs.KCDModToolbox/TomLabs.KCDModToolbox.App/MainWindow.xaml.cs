@@ -21,6 +21,13 @@ namespace TomLabs.KCDModToolbox.App
 			DataContext = VM;
 		}
 
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			VM.AdminPanel.Console.ConsoleOutput.Clear();
+			VM.AdminPanel.Console.ConsoleOutput.DisposeLogWatcher();
+
+			base.OnClosing(e);
+		}
 	}
 
 	public class PagingCollectionView : CollectionView

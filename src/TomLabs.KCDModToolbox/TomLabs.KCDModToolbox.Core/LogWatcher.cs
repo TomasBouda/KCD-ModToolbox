@@ -31,11 +31,21 @@ namespace TomLabs.KCDModToolbox.Core
 			FileName = fileName;
 			Path = System.IO.Path.GetDirectoryName(FileName);
 			Filter = System.IO.Path.GetFileName(FileName);
+		}
 
+		public void Start()
+		{
 			Stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 			Reader = new StreamReader(Stream);
-
 			Stream.Position = Stream.Length;
+			EnableRaisingEvents = true;
+		}
+
+		public void Stop()
+		{
+			EnableRaisingEvents = false;
+			Reader.Close();
+			Stream.Close();
 		}
 
 		public void OnChanged(object o, FileSystemEventArgs e)

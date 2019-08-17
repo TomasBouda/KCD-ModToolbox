@@ -25,15 +25,13 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 
 		private LogWatcher LogWatcher { get; set; }
 
-		private int CommandIndex { get; set; }
-
-		public ConsoleOutputViewModel()
+		public ConsoleOutputViewModel(string kcdDirectory)
 		{
-			KCDLogPath = @"C:\Program Files (x86)\Steam\steamapps\common\KingdomComeDeliverance\kcd.log"; // TODO
+			KCDLogPath = @$"{kcdDirectory}\kcd.log";
 			LogWatcher = new LogWatcher(KCDLogPath);
 			LogWatcher.NotifyFilter = (NotifyFilters.LastWrite | NotifyFilters.Size);
 			LogWatcher.TextChanged += LogWatcher_TextChanged;
-			LogWatcher.EnableRaisingEvents = true;
+			LogWatcher.Start();
 		}
 
 		private void LogWatcher_TextChanged(object sender, LogWatcherEventArgs e)
@@ -44,7 +42,6 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 				{
 					AddLogEntry(cmd);
 				}
-				CommandIndex = Entries.Count;
 			});
 		}
 
@@ -147,6 +144,12 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			}
 
 			return false;
+		}
+
+		public void DisposeLogWatcher()
+		{
+			LogWatcher.Stop();
+			LogWatcher.Dispose();
 		}
 	}
 }

@@ -5,11 +5,11 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox
 {
 	public class AdminPanelViewModel : BaseViewModel
 	{
-		public ConsoleViewModel Console { get; set; } = new ConsoleViewModel();
+		public ConsoleViewModel Console { get; set; }
 
-		public AdminPanelViewModel()
+		public AdminPanelViewModel(string kcdDirectory)
 		{
-
+			Console = new ConsoleViewModel(kcdDirectory);
 		}
 	}
 }

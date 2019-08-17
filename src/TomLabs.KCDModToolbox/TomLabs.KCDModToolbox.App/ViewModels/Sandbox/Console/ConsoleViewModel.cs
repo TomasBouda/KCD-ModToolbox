@@ -8,7 +8,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 	{
 		public ConsoleInputViewModel ConsoleInput { get; set; } = new ConsoleInputViewModel();
 
-		public ConsoleOutputViewModel ConsoleOutput { get; set; } = new ConsoleOutputViewModel();
+		public ConsoleOutputViewModel ConsoleOutput { get; set; }
 
 		public ICommand RunCommandCmd { get; set; }
 		public ICommand InsertPreviousCommandCmd { get; set; }
@@ -16,16 +16,15 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 		public ICommand ClearInputCmd { get; set; }
 		public ICommand ClearConsoleCmd { get; set; }
 
-		public ICommand SuggestCmd { get; set; }
-
-		public ConsoleViewModel()
+		public ConsoleViewModel(string kcdDirectory)
 		{
 			RunCommandCmd = new RelayCommand(RunCommand);
 			InsertPreviousCommandCmd = new RelayCommand(InsertPreviousCommand);
 			InsertNextCommandCmd = new RelayCommand(InsertNextCommand);
 			ClearInputCmd = new RelayCommand(ClearInput);
 			ClearConsoleCmd = new RelayCommand(ClearConsole);
-			SuggestCmd = new RelayCommand(() => ConsoleInput.Intelisense());
+
+			ConsoleOutput = new ConsoleOutputViewModel(kcdDirectory);
 		}
 
 		public void RunCommand()
@@ -47,11 +46,13 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 		private void InsertPreviousCommand()
 		{
 			ConsoleInput.Text = ConsoleOutput.PreviousCommand().CommandText;
+			ConsoleInput.MoveCaretToEnd();
 		}
 
 		private void InsertNextCommand()
 		{
 			ConsoleInput.Text = ConsoleOutput.NextCommand().CommandText;
+			ConsoleInput.MoveCaretToEnd();
 		}
 	}
 }

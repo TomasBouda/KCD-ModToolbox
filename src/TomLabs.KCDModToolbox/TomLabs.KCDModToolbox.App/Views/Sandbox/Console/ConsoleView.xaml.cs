@@ -26,21 +26,9 @@ namespace TomLabs.KCDModToolbox.App.Views.Sandbox.Console
 			Scroller.ScrollToBottom();
 		}
 
-		private void ItemsControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		private void UserControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
 		{
-			txtConsoleInput.Focus();
-		}
 
-		private void TxtConsoleInput_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			if (e.Key == System.Windows.Input.Key.Down)
-			{
-				txtConsoleInput.CaretIndex = txtConsoleInput.Text.Length;
-			}
-			else if (e.Key == System.Windows.Input.Key.Up)
-			{
-				txtConsoleInput.CaretIndex = txtConsoleInput.Text.Length;
-			}
 		}
 	}
 }

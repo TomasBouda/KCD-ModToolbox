@@ -12,6 +12,6 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <sbx:AdminPanelView />
+        <sbx:AdminPanelView DataContext="{Binding AdminPanel}" />
     </Grid>
 </Window>
