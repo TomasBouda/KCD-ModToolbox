@@ -24,7 +24,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			ClearInputCmd = new RelayCommand(ClearInput);
 			ClearConsoleCmd = new RelayCommand(ClearConsole);
 
-			ConsoleOutput = new ConsoleOutputViewModel(kcdDirectory);
+			ConsoleOutput = new ConsoleOutputViewModel();
 		}
 
 		public void RunCommand()

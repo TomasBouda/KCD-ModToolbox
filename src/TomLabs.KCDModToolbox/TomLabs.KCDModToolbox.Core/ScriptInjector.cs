@@ -4,7 +4,7 @@ namespace TomLabs.KCDModToolbox.Core
 {
 	public class ScriptInjector
 	{
-		private const string BRIDGE_FILE_PATH = @"c:\Program Files (x86)\Steam\steamapps\common\KingdomComeDeliverance\mods\KCD_Bootloader\invoke_command.txt";
+		private static string BridgeFilePath { get; set; }
 
 		private static ScriptInjector _instance;
 		public static ScriptInjector Instance
@@ -20,14 +20,19 @@ namespace TomLabs.KCDModToolbox.Core
 			}
 		}
 
+		public static void SetBridgeFilePath(string filePath)
+		{
+			BridgeFilePath = filePath;
+		}
+
 		public void Inject(string command)
 		{
-			File.WriteAllText(BRIDGE_FILE_PATH, command);
+			File.WriteAllText(BridgeFilePath, command);
 		}
 
 		public void InjectCommand(string command)
 		{
-			File.WriteAllText(BRIDGE_FILE_PATH, $"System.ExecuteCommand('{command}')");
+			File.WriteAllText(BridgeFilePath, $"System.ExecuteCommand('{command}')");
 		}
 	}
 }

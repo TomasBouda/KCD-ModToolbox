@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:time="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.Time"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -14,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="5" />
+            <RowDefinition Height="auto" />
             <RowDefinition
                 Height="auto"
                 MinHeight="50"
@@ -23,12 +24,25 @@
 
         <ToolBarTray />
 
-        <Grid Grid.Row="1" />
+        <Grid Grid.Row="1">
+            <TabControl>
+                <TabItem Header="Time">
+                    <time:TimePanelView DataContext="{Binding TimePanel}" />
+                </TabItem>
+            </TabControl>
+        </Grid>
 
         <GridSplitter
             Grid.Row="2"
             Height="5"
-            HorizontalAlignment="Stretch" />
+            HorizontalAlignment="Stretch" >
+            <GridSplitter.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
 
         <Grid Grid.Row="3">
             <con:ConsoleView DataContext="{Binding Console}" />

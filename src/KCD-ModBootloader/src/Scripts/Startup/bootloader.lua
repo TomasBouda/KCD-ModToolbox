@@ -65,10 +65,10 @@ function bootloader:execute_commands()
 
 			if not success then
 				bootloader:logError("Command execution failed!")
-				-- bootloader:command_log("[FAILED] " .. tostring(message));
+				bootloader:command_log("[FAILED] " .. tostring(message));
 			else
 				bootloader:logDebug("Command execution succeeeded.")
-				-- bootloader:command_log("[SUCCESS] " .. tostring(message));
+				bootloader:command_log("[SUCCESS] " .. tostring(command));
 			end
 		end
 	end
@@ -94,7 +94,7 @@ function bootloader:timerCallback(nTimerId)
 	bootloader:execute_commands()
 	bootloader:clear_commands()
 
-	Script.SetTimer(1000, function(nTimerId) bootloader:timerCallback(nTimerId) end)
+	Script.SetTimer(500, function(nTimerId) bootloader:timerCallback(nTimerId) end)
 end
 
 function bootloader:uiActionListener(actionName, eventName, argTable)

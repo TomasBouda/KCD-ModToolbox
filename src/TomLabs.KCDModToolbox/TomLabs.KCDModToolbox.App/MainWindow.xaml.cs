@@ -24,7 +24,6 @@ namespace TomLabs.KCDModToolbox.App
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			VM.AdminPanel.Console.ConsoleOutput.Clear();
-			VM.AdminPanel.Console.ConsoleOutput.DisposeLogWatcher();
 
 			base.OnClosing(e);
 		}

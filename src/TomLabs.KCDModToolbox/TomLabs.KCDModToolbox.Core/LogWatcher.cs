@@ -33,6 +33,14 @@ namespace TomLabs.KCDModToolbox.Core
 			Filter = System.IO.Path.GetFileName(FileName);
 		}
 
+		public static LogWatcher CreateDefault(string fileName)
+		{
+			return new LogWatcher(fileName)
+			{
+				NotifyFilter = (NotifyFilters.LastWrite | NotifyFilters.Size)
+			};
+		}
+
 		public void Start()
 		{
 			Stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -46,6 +54,12 @@ namespace TomLabs.KCDModToolbox.Core
 			EnableRaisingEvents = false;
 			Reader.Close();
 			Stream.Close();
+		}
+
+		public void Reset()
+		{
+			Stop();
+			Start();
 		}
 
 		public void OnChanged(object o, FileSystemEventArgs e)

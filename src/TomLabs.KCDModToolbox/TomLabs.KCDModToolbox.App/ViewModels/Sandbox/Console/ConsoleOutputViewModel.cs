@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Input;
 using TomLabs.KCDModToolbox.Core;
 using TomLabs.KCDModToolbox.Core.Extensions.Collections;
+using TomLabs.KCDModToolbox.Core.Sandbox;
 using TomLabs.Shadowgem.Extensions.String;
 using TomLabs.WPF.Tools;
+using TomLabs.WPF.Tools.Commands;
 
 namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 {
@@ -15,23 +18,19 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 		private const int MAX_CONSOLE_ENTRIES = 100;
 		private readonly string flushLogPath = $"{AppDomain.CurrentDomain.BaseDirectory}consoleLog.txt";
 
-		private string KCDLogPath { get; set; }
-
 		public ObservableCollection<ConsoleEntry> Entries { get; set; } = new ObservableCollection<ConsoleEntry>();
 
 		public LinkedList<ConsoleEntry> CommandsCache { get; set; } = new LinkedList<ConsoleEntry>();
 
 		public LinkedListNode<ConsoleEntry> CurrentCommand { get; set; }
 
-		private LogWatcher LogWatcher { get; set; }
+		public ICommand ResetLogWatcherCmd { get; set; }
 
-		public ConsoleOutputViewModel(string kcdDirectory)
+		public ConsoleOutputViewModel()
 		{
-			KCDLogPath = @$"{kcdDirectory}\kcd.log";
-			LogWatcher = new LogWatcher(KCDLogPath);
-			LogWatcher.NotifyFilter = (NotifyFilters.LastWrite | NotifyFilters.Size);
-			LogWatcher.TextChanged += LogWatcher_TextChanged;
-			LogWatcher.Start();
+			CommandExecutor.Instance.LogWatcher.TextChanged += LogWatcher_TextChanged;
+
+			ResetLogWatcherCmd = new RelayCommand(CommandExecutor.Instance.LogWatcher.Reset);
 		}
 
 		private void LogWatcher_TextChanged(object sender, LogWatcherEventArgs e)
@@ -77,7 +76,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			// Do not inject if command is special - is just for application
 			if (!HandleSpecialCommand(commandText))
 			{
-				ScriptInjector.Instance.InjectCommand(commandText);
+				CommandExecutor.Instance.ExecuteCommandText(commandText);
 			}
 
 			Add(commandText, true);
@@ -144,12 +143,6 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			}
 
 			return false;
-		}
-
-		public void DisposeLogWatcher()
-		{
-			LogWatcher.Stop();
-			LogWatcher.Dispose();
 		}
 	}
 }

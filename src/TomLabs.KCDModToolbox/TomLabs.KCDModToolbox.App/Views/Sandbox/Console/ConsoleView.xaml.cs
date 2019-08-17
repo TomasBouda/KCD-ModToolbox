@@ -25,10 +25,5 @@ namespace TomLabs.KCDModToolbox.App.Views.Sandbox.Console
 		{
 			Scroller.ScrollToBottom();
 		}
-
-		private void UserControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-		{
-
-		}
 	}
 }

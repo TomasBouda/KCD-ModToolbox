@@ -5,15 +5,41 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <PackageId>KCDModToolbox</PackageId>
+    <Authors>Tomas Bouda</Authors>
+    <Product>TomLabs.KCDModToolbox</Product>
+    <PackageProjectUrl>https://github.com/TomasBouda/KCD-ModToolbox</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\arrow_refresh.png" />
+    <None Remove="Images\arrow_right.png" />
+    <None Remove="Images\broom.png" />
+    <None Remove="Images\speedometer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.5.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj" />
     <ProjectReference Include="..\TomLabs.KCDModToolbox.Core\TomLabs.KCDModToolbox.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\arrow_refresh.png" />
+    <Resource Include="Images\arrow_right.png" />
+    <Resource Include="Images\broom.png" />
+    <Resource Include="Images\speedometer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>
