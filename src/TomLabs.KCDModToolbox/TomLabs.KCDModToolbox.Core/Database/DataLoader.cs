@@ -1,5 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using TomLabs.KCDModToolbox.Core.Database.Buffs;
+using TomLabs.KCDModToolbox.Core.Extensions;
 
 namespace TomLabs.KCDModToolbox.Core.Database
 {
@@ -7,6 +11,8 @@ namespace TomLabs.KCDModToolbox.Core.Database
 	{
 		private readonly string dbFilePath;
 		private readonly string workingDirectory;
+
+		public DatabaseDescriptor Database { get; set; }
 
 		public DataLoader(string dbFilePath, string workingDirectory)
 		{
@@ -29,11 +35,14 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			{
 				File.Delete(tblFile);
 			}
+
+			Database = new DatabaseDescriptor(workingDirectory);
 		}
 
-		public DatabaseDescriptor GetDatabase()
+		public List<Buff> GetBuffs()
 		{
-			return new DatabaseDescriptor(workingDirectory);
+			var table = Database.GetTable("buff", false).LoadTableData();
+			return table.Rows.Select(r => new Buff(r.AsDict()["buff_id"].ToString(), r.AsDict()["buff_name"].ToString())).ToList();
 		}
 	}
 }

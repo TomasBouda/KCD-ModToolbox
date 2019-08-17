@@ -1,13 +1,10 @@
-﻿using System;
-using TomLabs.KCDModToolbox.Core.Database;
+﻿using TomLabs.KCDModToolbox.Core.Database;
 using TomLabs.WPF.Tools;
 
 namespace TomLabs.KCDModToolbox.App.ViewModels.Database
 {
 	public class DatabaseViewModel : BaseViewModel
 	{
-		private readonly string DbFilePath = @"c:\Program Files (x86)\Steam\steamapps\common\KingdomComeDeliverance\Data\Tables.pak";
-		private readonly string WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory + "dbCache";
 
 		private DatabaseDescriptor db;
 
@@ -15,8 +12,8 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Database
 
 		public DatabaseViewModel()
 		{
-			var dl = new DataLoader(DbFilePath, WorkingDirectory);
-			db = dl.GetDatabase();
+			//var dl = new DataLoader(DbFilePath, WorkingDirectory);
+			//db = dl.Database;
 		}
 
 		public void ShowTable(string tableName, bool loadRelations)
