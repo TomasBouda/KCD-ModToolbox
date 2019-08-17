@@ -65,10 +65,10 @@ function bootloader:execute_commands()
 
 			if not success then
 				bootloader:logError("Command execution failed!")
-				bootloader:command_log("[FAILED] " .. tostring(message));
+				-- bootloader:command_log("[FAILED] " .. tostring(message));
 			else
 				bootloader:logDebug("Command execution succeeeded.")
-				bootloader:command_log("[SUCCESS] " .. tostring(message));
+				-- bootloader:command_log("[SUCCESS] " .. tostring(message));
 			end
 		end
 	end

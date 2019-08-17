@@ -28,6 +28,8 @@ wh_ui_FPS = 0
 
 https://docs.cryengine.com/display/CEPROG/Console
 DumpCommandsVars i_
+https://docs.cryengine.com/display/CRYAUTOGEN/Home
+
 
 cheat_eval cheat:logInfo(cheat:argsProcess("tokens:43590e12-70a9-3aa8-dc56-8dd71a7ce4a7,00d2d228-b63c-4aa7-8f18-dc9cf74ec97e", cheat.cheat_spawn_npc_args)["tokens"].value)
 
