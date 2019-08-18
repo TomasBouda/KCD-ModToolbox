@@ -17,6 +17,16 @@
 			return new Command($"cheat_set_time_speed ratio:{ratio}");
 		}
 
+		public static Command AddBuff(string id)
+		{
+			return new Command($"cheat_add_buff id:{id}");
+		}
+
+		public static Command RemoveBuff(string id)
+		{
+			return new Command($"cheat_remove_buff id:{id}");
+		}
+
 		public static Command AddBuffImmortal()
 		{
 			return new Command("cheat_add_buff_immortal");

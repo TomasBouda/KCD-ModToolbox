@@ -9,7 +9,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels
 	{
 		private string KCDDirectory { get; set; }
 		private string DbFilePath { get; set; }
-		private string WorkingDirectory { get; set; } = AppDomain.CurrentDomain.BaseDirectory + "dbCache";
+		private string DbWorkingDirectory { get; set; } = AppDomain.CurrentDomain.BaseDirectory + "dbCache";
 
 		public AdminPanelViewModel AdminPanel { get; set; }
 
@@ -18,9 +18,9 @@ namespace TomLabs.KCDModToolbox.App.ViewModels
 			KCDDirectory = @"c:\Program Files (x86)\Steam\steamapps\common\KingdomComeDeliverance";
 			DbFilePath = $@"{KCDDirectory}Data\Tables.pak";
 
+			DataLoader.Instance.SetPaths(DbFilePath, DbWorkingDirectory);
 			AdminPanel = new AdminPanelViewModel(KCDDirectory);
-			var dl = new DataLoader(DbFilePath, WorkingDirectory);
-			var buffs = dl.GetBuffs();
+
 		}
 	}
 }

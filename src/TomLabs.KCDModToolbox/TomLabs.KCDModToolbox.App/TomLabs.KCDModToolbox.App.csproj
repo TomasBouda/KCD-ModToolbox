@@ -17,6 +17,8 @@
     <None Remove="Images\arrow_right.png" />
     <None Remove="Images\broom.png" />
     <None Remove="Images\heart.png" />
+    <None Remove="Images\ruby_add.png" />
+    <None Remove="Images\ruby_delete.png" />
     <None Remove="Images\speedometer.png" />
     <None Remove="Images\user_death.png" />
   </ItemGroup>
@@ -37,6 +39,8 @@
     <Resource Include="Images\arrow_right.png" />
     <Resource Include="Images\broom.png" />
     <Resource Include="Images\heart.png" />
+    <Resource Include="Images\ruby_add.png" />
+    <Resource Include="Images\ruby_delete.png" />
     <Resource Include="Images\speedometer.png" />
     <Resource Include="Images\user_death.png" />
   </ItemGroup>
@@ -44,7 +48,7 @@
   <ItemGroup>
     <Page Update="Themes\Generic.xaml">
       <Generator></Generator>
-      <SubType>Designer</SubType>
+      <SubType></SubType>
     </Page>
   </ItemGroup>
 

@@ -2,13 +2,10 @@
     x:Class="TomLabs.KCDModToolbox.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conntrols="clr-namespace:TomLabs.KCDModToolbox.App.Controls"
     xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Themes/Generic.xaml" />
     </Application.Resources>
 </Application>

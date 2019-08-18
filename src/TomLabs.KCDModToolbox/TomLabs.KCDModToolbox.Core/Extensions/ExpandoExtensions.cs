@@ -9,5 +9,10 @@ namespace TomLabs.KCDModToolbox.Core.Extensions
 		{
 			return obj as IDictionary<string, object>;
 		}
+
+		public static object AsDict(this ExpandoObject obj, string key)
+		{
+			return obj.AsDict()[key];
+		}
 	}
 }

@@ -20,44 +20,62 @@
                 Margin="10"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
+
                 <controls:ImageButton
                     Margin="2,0"
-                    Padding="6,5,2,5"
-                    Background="LightGray"
-                    BorderBrush="Black"
-                    BorderThickness="1"
                     Command="{Binding ToggleBuffImmortalCmd}"
-                    CornerRadius="3"
-                    Cursor="Hand"
-                    ImageSource="/Images/user_death.png"
+                    ImageSource="pack://application:,,,/Images/user_death.png"
                     ToolTip="Toggle buff immortal" />
 
                 <controls:ImageButton
                     Margin="2,0"
-                    Padding="6,5,2,5"
-                    Background="LightGray"
-                    BorderBrush="Black"
-                    BorderThickness="1"
                     Command="{Binding ToggleBuffInvisibleCmd}"
-                    CornerRadius="3"
-                    Cursor="Hand"
-                    ImageSource="/Images/3d_glasses.png"
+                    ImageSource="pack://application:,,,/Images/3d_glasses.png"
                     ToolTip="Toggle buff invisible" />
 
                 <controls:ImageButton
                     Margin="2,0"
-                    Padding="6,5,2,5"
-                    Background="LightGray"
-                    BorderBrush="Black"
-                    BorderThickness="1"
                     Command="{Binding HealCmd}"
-                    CornerRadius="3"
-                    Cursor="Hand"
-                    ImageSource="/Images/heart.png"
+                    ImageSource="pack://application:,,,/Images/heart.png"
                     ToolTip="Heal" />
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="All Buffs" />
+        <GroupBox Grid.Row="1" Header="All Buffs">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button Command="{Binding LoadAllBuffsCmd}" Content="Load Buffs" />
+
+                <ListBox Grid.Row="1" ItemsSource="{Binding AllBuffs}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <controls:ImageButton
+                                    Margin="2,0"
+                                    Command="{Binding AddCmd}"
+                                    ImageSource="pack://application:,,,/Images/ruby_add.png"
+                                    ToolTip="Add buff" />
+                                <controls:ImageButton
+                                    Margin="2,0"
+                                    Command="{Binding RemoveCmd}"
+                                    ImageSource="pack://application:,,,/Images/ruby_delete.png"
+                                    ToolTip="Remove buff" />
+
+                                <TextBlock
+                                    Margin="10,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="{Binding Details.Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>
