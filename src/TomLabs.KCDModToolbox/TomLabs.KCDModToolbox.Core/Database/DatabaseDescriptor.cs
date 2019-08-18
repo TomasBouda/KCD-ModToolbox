@@ -12,7 +12,11 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 		private string WorkingDirectory { get; set; }
 
+		private string LocalizationsDir { get; set; }
+
 		public List<TableDescriptor> Tables { get; set; } = new List<TableDescriptor>();
+
+		public List<LocalizationTable> Localizations { get; set; } = new List<LocalizationTable>();
 
 		[Obsolete("Only for serialization!")]
 		public DatabaseDescriptor()
@@ -20,9 +24,10 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 		}
 
-		public DatabaseDescriptor(string workingDirectory)
+		public DatabaseDescriptor(string workingDirectory, string localizationsDir)
 		{
 			WorkingDirectory = workingDirectory;
+			LocalizationsDir = localizationsDir;
 		}
 
 		public TableDescriptor GetTable(string tableName, bool loadRelations = true)
@@ -123,6 +128,26 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			}
 
 			return table;
+		}
+
+		public LocalizationTable GetLocalizationTable(string tableName)
+		{
+			var table = Localizations.FirstOrDefault(t => t.Name == tableName);
+
+			if (table != null)
+			{
+				return table;
+			}
+
+			string tablePath = Directory.GetFiles(LocalizationsDir, $"{tableName}.xml", SearchOption.AllDirectories)?.SingleOrDefault();
+			if (!string.IsNullOrEmpty(tablePath))
+			{
+				return new LocalizationTable(tablePath);
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }

@@ -19,16 +19,12 @@ namespace TomLabs.KCDModToolbox.App.Views.Sandbox.Console
 		private void UserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
 		{
 			VM = DataContext as ConsoleViewModel;
+			VM.ConsoleOutput.Entries.CollectionChanged += Entries_CollectionChanged;
 		}
 
-		private void txtConsoleInput_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		private void Entries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			Scroller.ScrollToBottom();
-		}
-
-		private void IcEntities_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
-		{
-
 		}
 	}
 }

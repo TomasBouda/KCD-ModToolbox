@@ -8,6 +8,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Buffs
 {
 	public class BuffViewModel : BaseViewModel
 	{
+		public string Name => Details.LocalizedName ?? Details.Name;
 		public Buff Details { get; set; }
 
 		public ICommand AddCmd { get; set; }

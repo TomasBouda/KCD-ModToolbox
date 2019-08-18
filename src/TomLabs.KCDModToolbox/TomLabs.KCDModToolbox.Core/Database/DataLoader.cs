@@ -10,6 +10,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 {
 	public class DataLoader
 	{
+		private string KCDDirectory { get; set; }
 		private string DbFilePath { get; set; }
 		private string WorkingDirectory { get; set; }
 
@@ -48,9 +49,10 @@ namespace TomLabs.KCDModToolbox.Core.Database
 		/// <summary>
 		/// Sets paths to Tables.pak and working directory where databse will be extracted.
 		/// </summary>
-		public void SetPaths(string dbFilePath, string workingDirectory)
+		public void SetPaths(string kcdDirectory, string workingDirectory)
 		{
-			DbFilePath = dbFilePath;
+			KCDDirectory = kcdDirectory;
+			DbFilePath = $@"{KCDDirectory}Data\Tables.pak";
 			WorkingDirectory = workingDirectory;
 		}
 
@@ -71,7 +73,13 @@ namespace TomLabs.KCDModToolbox.Core.Database
 				File.Delete(tblFile);
 			}
 
-			Database = new DatabaseDescriptor(WorkingDirectory);
+			// Add english localization
+			string localizationsDir = $@"{WorkingDirectory}\Localizations";
+			Directory.Delete(localizationsDir, true);
+			Directory.CreateDirectory(localizationsDir);
+			ZipFile.ExtractToDirectory($@"{KCDDirectory}\Localization\English_xml.pak", localizationsDir);
+
+			Database = new DatabaseDescriptor(WorkingDirectory, localizationsDir);
 
 			IsInitialized = true;
 		}
@@ -87,18 +95,41 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			}
 		}
 
+		public IDictionary<string, string> GetSoulLocalizations()
+		{
+			return Database.GetLocalizationTable("text_ui_soul")?.Rows;
+		}
+
 		public List<BuffClass> GetBuffClasses()
 		{
 			var table = Database.GetTable("buff_class", false).LoadTableData();
-			return table.Rows.Select(r => new BuffClass(r.AsDict("buff_class_id").ToString(), r.AsDict("buff_class_name").ToString())).ToList();
+			return table.Rows.Select(r =>
+				new BuffClass(
+					r.AsDict("buff_class_id").ToString(),
+					r.AsDict("buff_class_name").ToString())
+				).ToList();
 		}
 
 		public List<Buff> GetBuffs()
 		{
 			var table = Database.GetTable("buff", false).LoadTableData();
-			var buffs = table.Rows.Select(r => new Buff(r.AsDict("buff_id").ToString(), r.AsDict("buff_name").ToString(), r.AsDict("buff_class_id").ToString())).ToList();
+			var buffs = table.Rows.Select(r =>
+				new Buff(r.AsDict("buff_id").ToString(), r.AsDict("buff_name").ToString(), r.AsDict("buff_class_id").ToString())
+				{
+					UIName = r.AsDict("buff_ui_name").ToString(),
+					DescriptionKey = r.AsDict("buff_desc").ToString(),
+				}
+				).ToList();
+
 			var buffClasses = GetBuffClasses();
-			buffs.ForEach(b => b.Class = buffClasses.FirstOrDefault(c => c.Id == b.ClassId));
+			var localizations = GetSoulLocalizations();
+
+			buffs.ForEach(b =>
+			{
+				b.Class = buffClasses.FirstOrDefault(c => c.Id == b.ClassId);
+				b.LocalizedName = localizations.FirstOrDefault(l => l.Key == b.UIName).Value;
+				b.Description = localizations.FirstOrDefault(l => l.Key == b.DescriptionKey).Value;
+			});
 
 			return buffs;
 		}

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -44,8 +45,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 
 		public ConsoleInputViewModel()
 		{
-			// TODO
-			AllSuggestions = new ObservableCollection<string>(File.ReadAllLines(@"C:\Data\GIT\KCD-Cheat\Source\Docs\commands.txt"));
+			AllSuggestions = new ObservableCollection<string>(File.ReadAllLines($@"{AppDomain.CurrentDomain.BaseDirectory}Files\commands.txt"));
 
 			SuggestNextCmd = new RelayCommand(SuggestNextCommand);
 			SuggestPreviousCmd = new RelayCommand(SuggestPreviousCommand);

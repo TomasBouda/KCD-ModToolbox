@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using TomLabs.KCDModToolbox.Core.Sandbox;
 using TomLabs.Shadowgem.Extensions.String;
 using TomLabs.WPF.Tools;
@@ -29,15 +30,15 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Time
 		private async void GetTime()
 		{
 			var timeDict = await CommandBuilder.GetTime().ExecuteWithResultAsync();
-			GameTimeHours = timeDict["hours"]?.ToString().ToInt() ?? 0;
-			GameTimeMinutes = timeDict["minutes"]?.ToString().ToInt() ?? 0;
-			GameTimeSeconds = timeDict["seconds"]?.ToString().ToInt() ?? 0;
+			GameTimeHours = timeDict.GetValueOrDefault("hours", "0")?.ToString().ToInt() ?? 0;
+			GameTimeMinutes = timeDict.GetValueOrDefault("minutes", "0")?.ToString().ToInt() ?? 0;
+			GameTimeSeconds = timeDict.GetValueOrDefault("seconds", "0")?.ToString().ToInt() ?? 0;
 		}
 
 		private async void SetTime()
 		{
 			var timeDict = await CommandBuilder.GetTime().ExecuteWithResultAsync();
-			var currentTimeHours = timeDict["hours"]?.ToString().ToInt() ?? 0;
+			var currentTimeHours = timeDict.GetValueOrDefault("hours", "0")?.ToString().ToInt() ?? 0;
 			if (currentTimeHours < GameTimeHours)
 			{
 				await CommandBuilder.TimeAddHours(GameTimeHours - currentTimeHours).ExecuteAsync();

@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Files\commands.txt" />
     <None Remove="Images\3d_glasses.png" />
     <None Remove="Images\arrow_refresh.png" />
     <None Remove="Images\arrow_right.png" />
@@ -21,6 +22,12 @@
     <None Remove="Images\ruby_delete.png" />
     <None Remove="Images\speedometer.png" />
     <None Remove="Images\user_death.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Files\commands.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

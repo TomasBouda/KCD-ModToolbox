@@ -16,9 +16,9 @@ namespace TomLabs.KCDModToolbox.App.ViewModels
 		public MainWindowViewModel()
 		{
 			KCDDirectory = @"c:\Program Files (x86)\Steam\steamapps\common\KingdomComeDeliverance";
-			DbFilePath = $@"{KCDDirectory}Data\Tables.pak";
 
-			DataLoader.Instance.SetPaths(DbFilePath, DbWorkingDirectory);
+
+			DataLoader.Instance.SetPaths(KCDDirectory, DbWorkingDirectory);
 			AdminPanel = new AdminPanelViewModel(KCDDirectory);
 
 		}
