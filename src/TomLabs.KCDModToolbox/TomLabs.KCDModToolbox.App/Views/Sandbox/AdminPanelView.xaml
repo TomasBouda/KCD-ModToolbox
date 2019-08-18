@@ -17,7 +17,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" MinHeight="100" />
             <RowDefinition Height="auto" />
-            <RowDefinition MinHeight="60" />
+            <RowDefinition MinHeight="60" Height="100" />
         </Grid.RowDefinitions>
 
         <ToolBarTray />

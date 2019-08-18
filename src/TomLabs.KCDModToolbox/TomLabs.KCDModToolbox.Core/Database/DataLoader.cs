@@ -4,7 +4,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using TomLabs.KCDModToolbox.Core.Database.Buffs;
+using TomLabs.KCDModToolbox.Core.Database.Souls;
 using TomLabs.KCDModToolbox.Core.Extensions;
+using TomLabs.Shadowgem.Extensions.String;
 
 namespace TomLabs.KCDModToolbox.Core.Database
 {
@@ -137,6 +139,42 @@ namespace TomLabs.KCDModToolbox.Core.Database
 		public async Task<List<Buff>> GetBuffsAsync()
 		{
 			return await Task.Run(GetBuffs);
+		}
+
+		public List<VSoulCharacterData> GetVSoulCharacterData()
+		{
+			var table = Database.GetTable("v_soul_character_data", false).LoadTableData();
+			return table.Rows.Select(r =>
+				new VSoulCharacterData(
+					r.AsDict("soul_id").ToString(),
+					r.AsDict("name_string_id").ToString())
+				).ToList();
+		}
+
+		public List<Soul> GetSouls()
+		{
+			var table = Database.GetTable("soul", false).LoadTableData();
+			var souls = table.Rows.Select(r =>
+				new Soul(r.AsDict("soul_id").ToString(), r.AsDict("soul_name").ToString())
+				{
+					CombatLevel = r.AsDict("combat_level").ToString().ToInt(),
+					Courage = r.AsDict("courage").ToString().ToInt(),
+					Faction = r.AsDict("faction").ToString().ToInt(),
+					InitialClothingPresetId = r.AsDict("initial_clothing_preset_id").ToString().ToGuid(),
+					VIPClassId = r.AsDict("soul_vip_class_id").ToString().ToInt()
+				}
+				).ToList();
+
+			var vSoulCharData = GetVSoulCharacterData();
+			var localizations = GetSoulLocalizations();
+
+			souls.ForEach(s =>
+			{
+				s.UIName = vSoulCharData.FirstOrDefault(l => l.Id == s.Id).UIName;
+				s.LocalizedName = localizations.FirstOrDefault(l => l.Key == s.UIName).Value;
+			});
+
+			return souls;
 		}
 	}
 }

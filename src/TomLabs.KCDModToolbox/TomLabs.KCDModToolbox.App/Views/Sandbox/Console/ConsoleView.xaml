@@ -102,6 +102,10 @@
                                 Key="Space"
                                 Command="{Binding ConsoleInput.SuggestNextCmd}"
                                 Modifiers="Ctrl" />
+                            <KeyBinding
+                                Key="Space"
+                                Command="{Binding ConsoleInput.SuggestPreviousCmd}"
+                                Modifiers="Ctrl+Shift " />
                             <KeyBinding Key="Tab" Command="{Binding ConsoleInput.SuggestNextCmd}" />
                             <KeyBinding
                                 Key="Tab"
