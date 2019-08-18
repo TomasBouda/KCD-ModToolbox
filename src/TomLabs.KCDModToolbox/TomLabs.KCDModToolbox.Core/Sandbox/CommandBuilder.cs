@@ -51,5 +51,10 @@
 		{
 			return new Command("cheat_add_buff_heal");
 		}
+
+		public static Command SpawnNpc(string id, int distance = 5, int count = 1)
+		{
+			return new Command($"cheat_spawn_npc token:{id} distance:{distance} count:{count}");
+		}
 	}
 }

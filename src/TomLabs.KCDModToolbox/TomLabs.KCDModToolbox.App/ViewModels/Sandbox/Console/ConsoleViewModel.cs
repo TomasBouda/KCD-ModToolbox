@@ -45,13 +45,13 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 
 		private void InsertPreviousCommand()
 		{
-			ConsoleInput.Text = ConsoleOutput.PreviousCommand().CommandText;
+			ConsoleInput.Text = ConsoleOutput.PreviousCommand()?.CommandText ?? string.Empty;
 			ConsoleInput.MoveCaretToEnd();
 		}
 
 		private void InsertNextCommand()
 		{
-			ConsoleInput.Text = ConsoleOutput.NextCommand().CommandText;
+			ConsoleInput.Text = ConsoleOutput.NextCommand()?.CommandText ?? string.Empty;
 			ConsoleInput.MoveCaretToEnd();
 		}
 	}

@@ -14,8 +14,10 @@
   <ItemGroup>
     <None Remove="Files\commands.txt" />
     <None Remove="Images\3d_glasses.png" />
+    <None Remove="Images\arrow_down.png" />
     <None Remove="Images\arrow_refresh.png" />
     <None Remove="Images\arrow_right.png" />
+    <None Remove="Images\box_search.png" />
     <None Remove="Images\broom.png" />
     <None Remove="Images\heart.png" />
     <None Remove="Images\ruby_add.png" />
@@ -42,8 +44,10 @@
 
   <ItemGroup>
     <Resource Include="Images\3d_glasses.png" />
+    <Resource Include="Images\arrow_down.png" />
     <Resource Include="Images\arrow_refresh.png" />
     <Resource Include="Images\arrow_right.png" />
+    <Resource Include="Images\box_search.png" />
     <Resource Include="Images\broom.png" />
     <Resource Include="Images\heart.png" />
     <Resource Include="Images\ruby_add.png" />

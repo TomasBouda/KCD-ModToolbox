@@ -176,5 +176,10 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 			return souls;
 		}
+
+		public async Task<List<Soul>> GetSoulsAsync()
+		{
+			return await Task.Run(GetSouls);
+		}
 	}
 }

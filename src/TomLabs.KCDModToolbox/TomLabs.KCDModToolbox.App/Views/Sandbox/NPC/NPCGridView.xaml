@@ -1,0 +1,90 @@
+﻿<UserControl
+    x:Class="TomLabs.KCDModToolbox.App.Views.Sandbox.NPC.NPCGridView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:TomLabs.KCDModToolbox.App.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.NPC"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <DataGrid
+        AutoGenerateColumns="False"
+        CanUserAddRows="False"
+        CanUserDeleteRows="False"
+        CanUserReorderColumns="True"
+        CanUserSortColumns="True"
+        EnableRowVirtualization="True"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding FilteredNPCs}">
+        <DataGrid.Columns>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <controls:ImageButton
+                            Padding="2,0,-2,0"
+                            Command="{Binding SpawnCmd}"
+                            ImageSource="pack://application:,,,/Images/arrow_down.png"
+                            ToolTip="Spawn" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Name" SortMemberPath="Name">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Padding="2"
+                                Text="{Binding Name}"
+                                ToolTip="{Binding Details.Name}" />
+                            <TextBlock
+                                Padding="0,2"
+                                FontSize="11"
+                                FontStyle="Italic"
+                                Text="(" />
+                            <TextBlock
+                                Padding="0,2"
+                                FontSize="11"
+                                FontStyle="Italic"
+                                Text="{Binding Details.Name}" />
+                            <TextBlock
+                                Padding="0,2"
+                                FontSize="11"
+                                FontStyle="Italic"
+                                Text=")" />
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="CombatLevel" SortMemberPath="Details.CombatLevel">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.CombatLevel}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Faction" SortMemberPath="Details.Faction">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.Faction}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Courage" SortMemberPath="Details.Courage">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.Courage}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="VIPClassId" SortMemberPath="Details.VIPClassId">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.VIPClassId}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

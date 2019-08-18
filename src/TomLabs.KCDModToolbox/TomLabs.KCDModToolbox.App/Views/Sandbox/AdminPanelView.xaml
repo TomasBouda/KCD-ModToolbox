@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:npc="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.NPC"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
     xmlns:time="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.Time"
     d:DesignHeight="450"
@@ -17,13 +18,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" MinHeight="100" />
             <RowDefinition Height="auto" />
-            <RowDefinition MinHeight="60" Height="100" />
+            <RowDefinition Height="100" MinHeight="60" />
         </Grid.RowDefinitions>
 
         <ToolBarTray />
 
         <Grid Grid.Row="1">
             <TabControl>
+                <TabItem Header="NPCs">
+                    <npc:NPCPanelView DataContext="{Binding NPCPanel}" />
+                </TabItem>
                 <TabItem Header="Buffs">
                     <buffs:BuffsPanelView DataContext="{Binding BuffsPanel}" />
                 </TabItem>
