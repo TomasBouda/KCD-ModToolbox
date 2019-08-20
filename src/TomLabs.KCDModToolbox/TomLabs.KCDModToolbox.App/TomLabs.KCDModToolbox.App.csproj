@@ -19,10 +19,12 @@
     <None Remove="Images\arrow_right.png" />
     <None Remove="Images\box_search.png" />
     <None Remove="Images\broom.png" />
+    <None Remove="Images\draw_star.png" />
     <None Remove="Images\heart.png" />
     <None Remove="Images\ruby_add.png" />
     <None Remove="Images\ruby_delete.png" />
     <None Remove="Images\speedometer.png" />
+    <None Remove="Images\star.png" />
     <None Remove="Images\user_death.png" />
   </ItemGroup>
 
@@ -49,10 +51,12 @@
     <Resource Include="Images\arrow_right.png" />
     <Resource Include="Images\box_search.png" />
     <Resource Include="Images\broom.png" />
+    <Resource Include="Images\draw_star.png" />
     <Resource Include="Images\heart.png" />
     <Resource Include="Images\ruby_add.png" />
     <Resource Include="Images\ruby_delete.png" />
     <Resource Include="Images\speedometer.png" />
+    <Resource Include="Images\star.png" />
     <Resource Include="Images\user_death.png" />
   </ItemGroup>
 

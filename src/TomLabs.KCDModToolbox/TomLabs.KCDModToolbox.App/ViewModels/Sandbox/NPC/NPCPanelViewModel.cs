@@ -11,10 +11,12 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.NPC
 {
 	public class NPCPanelViewModel : BaseViewModel
 	{
-		public string SearchText { get; set; } = string.Empty;
+		public NPCSearchViewModel Search { get; set; } = new NPCSearchViewModel();
 
 		private List<NPCViewModel> AllNPCs { get; set; }
 		public ObservableCollection<NPCViewModel> FilteredNPCs { get; set; }
+
+		public NPCViewModel SelectedNPC { get; set; }
 
 		public ICommand SearchCmd { get; set; }
 
@@ -25,7 +27,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.NPC
 
 		private async Task LoadAllSouls()
 		{
-			AllNPCs = (await DataLoader.Instance.GetSoulsAsync()).Select(s => new NPCViewModel(s)).ToList();
+			AllNPCs = (await DataLoader.Instance.GetSoulsAsync()).Select(s => new NPCViewModel(s)).OrderBy(n => n.Name).ToList();
 		}
 
 		private async Task SearchNPC()
@@ -35,13 +37,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.NPC
 				await LoadAllSouls();
 			}
 
-			FilteredNPCs = new ObservableCollection<NPCViewModel>(
-				AllNPCs.Where(n =>
-					n.Details.LocalizedName?.Contains(SearchText, System.StringComparison.InvariantCultureIgnoreCase) == true
-					||
-					n.Details.Name.Contains(SearchText, System.StringComparison.InvariantCultureIgnoreCase)
-					)
-				);
+			FilteredNPCs = new ObservableCollection<NPCViewModel>(AllNPCs.Where(Search.Predicate()));
 		}
 	}
 }

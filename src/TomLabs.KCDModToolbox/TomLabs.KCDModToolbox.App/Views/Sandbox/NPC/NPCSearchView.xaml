@@ -1,0 +1,139 @@
+﻿<UserControl
+    x:Class="TomLabs.KCDModToolbox.App.Views.Sandbox.NPC.NPCSearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:TomLabs.KCDModToolbox.App.Controls"
+    xmlns:cvt="clr-namespace:TomLabs.KCDModToolbox.App.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.NPC"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <cvt:BoolToVisibilityConverter x:Key="BTVConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                Height="30"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center"
+                FontSize="14"
+                Text="{Binding Search.Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <controls:ImageButton
+                    Margin="2"
+                    Command="{Binding Search.ToggleFavoritesOnlyCmd}"
+                    ImageSource="pack://application:,,,/Images/star.png"
+                    ToolTip="Favorite only"
+                    Visibility="{Binding Search.OnlyFavorites, Converter={StaticResource BTVConverter}}" />
+                <controls:ImageButton
+                    Margin="2"
+                    Command="{Binding Search.ToggleFavoritesOnlyCmd}"
+                    ImageSource="pack://application:,,,/Images/draw_star.png"
+                    ToolTip="All"
+                    Visibility="{Binding Search.OnlyFavorites, Converter={StaticResource BTVConverter}, ConverterParameter=!}" />
+            </StackPanel>
+
+            <controls:ImageButton
+                Grid.Column="2"
+                Margin="2"
+                Command="{Binding Search.ClearAllCmd}"
+                ImageSource="pack://application:,,,/Images/broom.png"
+                ToolTip="Clear all fields" />
+        </Grid>
+
+        <Expander Grid.Row="1" Header="Advanced Search">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="10">
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="CombatLevel " />
+                        <TextBox Text="{Binding Search.CombatLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="Faction " />
+                        <TextBox Text="{Binding Search.Faction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="Strength " />
+                        <TextBox Text="{Binding Search.Strength, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="Agility " />
+                        <TextBox Text="{Binding Search.Agility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="10">
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="Vitality " />
+                        <TextBox Text="{Binding Search.Vitality, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="Speech " />
+                        <TextBox Text="{Binding Search.Speech, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel Margin="2" LastChildFill="True">
+                        <TextBlock Text="VIPClass " />
+                        <TextBox Text="{Binding Search.VIPClass, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

@@ -20,7 +20,6 @@ namespace TomLabs.KCDModToolbox.App.ViewModels
 
 			DataLoader.Instance.SetPaths(KCDDirectory, DbWorkingDirectory);
 			AdminPanel = new AdminPanelViewModel(KCDDirectory);
-			DataLoader.Instance.GetSouls();
 		}
 	}
 }

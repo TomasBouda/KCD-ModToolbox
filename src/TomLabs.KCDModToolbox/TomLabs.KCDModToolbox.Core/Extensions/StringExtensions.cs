@@ -8,5 +8,10 @@ namespace TomLabs.KCDModToolbox.Core.Extensions
 		{
 			return Guid.TryParse(str, out var res) ? res : Guid.Empty;
 		}
+
+		public static bool ToBool(this string str)
+		{
+			return bool.TryParse(str, out var res) ? res : false;
+		}
 	}
 }

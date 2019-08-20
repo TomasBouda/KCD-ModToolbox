@@ -5,7 +5,7 @@ Script.ReloadScript("Scripts/bootloader_utils.lua")
 function bootloader:load_file(filename)
 	bootloader:logVerbose("Loading %s", tostring(filename))
 	local chunk, err = loadfile(filename)
-    if not err then
+	if not err then
 		if pcall(function() chunk() end) then
 			bootloader:logVerbose("Loaded %s successfully", tostring(filename))
 		else
@@ -13,7 +13,7 @@ function bootloader:load_file(filename)
 		end
 	else
 		bootloader:logError("Failed to load %s", tostring(filename))
-    end
+	end
 end
 
 function bootloader:load_mods()
@@ -49,7 +49,7 @@ end
 
 function bootloader:execute_command(command)
 	local func = assert(loadstring(command));
-    func();
+	func();
 end
 
 function bootloader:execute_commands()
@@ -76,7 +76,7 @@ end
 
 function bootloader:clear_commands()
 	local file = io.open('mods\\KCD_Bootloader\\invoke_command.txt', "w");
-    if file == nil then return end;
+	if file == nil then return end;
 	
 	file:write("");
 	file:close();
@@ -86,8 +86,8 @@ function bootloader:command_log(message)
 	local logfile = io.open('mods\\KCD_Bootloader\\command_log.txt', "a");
 	if logfile == nil then return {} end;
 	
-    logfile:write(message .. "\n");
-    logfile:close();
+	logfile:write(message .. "\n");
+	logfile:close();
 end
 
 function bootloader:timerCallback(nTimerId)

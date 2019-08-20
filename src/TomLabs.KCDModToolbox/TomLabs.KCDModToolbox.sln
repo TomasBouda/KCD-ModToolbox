@@ -9,6 +9,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.KCDModToolbox.Core"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomLabs.WPF.Tools", "..\..\..\LookForBrick\src\TomLabs.LookForBrick\TomLabs.WPF.Tools\TomLabs.WPF.Tools.csproj", "{A4218889-B6D2-4627-B980-EFE0FCB7A129}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{162C2FE2-BA41-4DB6-A663-35FD09E36679}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.gitignore = ..\..\.gitignore
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KCD-ModBootloader", "KCD-ModBootloader", "{59C8EE3C-7BF4-44E3-9F0D-0938B8F0803D}"
+	ProjectSection(SolutionItems) = preProject
+		..\KCD-ModBootloader\build.ps1 = ..\KCD-ModBootloader\build.ps1
+		..\KCD-ModBootloader\invoke_command.txt = ..\KCD-ModBootloader\invoke_command.txt
+		..\KCD-ModBootloader\log.txt = ..\KCD-ModBootloader\log.txt
+		..\KCD-ModBootloader\mod.manifesttemplate = ..\KCD-ModBootloader\mod.manifesttemplate
+		..\KCD-ModBootloader\release.ps1 = ..\KCD-ModBootloader\release.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BBFEC86B-AA05-4426-A8B8-E7BAFBF3876A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{2C5900D3-68A4-4E54-89E4-83AF56D2D80B}"
+	ProjectSection(SolutionItems) = preProject
+		..\KCD-ModBootloader\src\Scripts\bootloader_utils.lua = ..\KCD-ModBootloader\src\Scripts\bootloader_utils.lua
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Startup", "Startup", "{BCD53EE3-BF70-45AC-914A-F40F723C818C}"
+	ProjectSection(SolutionItems) = preProject
+		..\KCD-ModBootloader\src\Scripts\Startup\bootloader.lua = ..\KCD-ModBootloader\src\Scripts\Startup\bootloader.lua
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +57,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBFEC86B-AA05-4426-A8B8-E7BAFBF3876A} = {59C8EE3C-7BF4-44E3-9F0D-0938B8F0803D}
+		{2C5900D3-68A4-4E54-89E4-83AF56D2D80B} = {BBFEC86B-AA05-4426-A8B8-E7BAFBF3876A}
+		{BCD53EE3-BF70-45AC-914A-F40F723C818C} = {2C5900D3-68A4-4E54-89E4-83AF56D2D80B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E0B600B-9774-4640-B95B-50AE36882249}

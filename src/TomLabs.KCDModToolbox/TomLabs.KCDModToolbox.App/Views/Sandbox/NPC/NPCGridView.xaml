@@ -3,12 +3,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:TomLabs.KCDModToolbox.App.Controls"
+    xmlns:cvt="clr-namespace:TomLabs.KCDModToolbox.App.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.NPC"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <cvt:BoolToVisibilityConverter x:Key="BTVConverter" />
+    </UserControl.Resources>
     <DataGrid
         AutoGenerateColumns="False"
         CanUserAddRows="False"
@@ -17,16 +21,34 @@
         CanUserSortColumns="True"
         EnableRowVirtualization="True"
         IsSynchronizedWithCurrentItem="True"
-        ItemsSource="{Binding FilteredNPCs}">
+        ItemsSource="{Binding FilteredNPCs}"
+        SelectedItem="{Binding SelectedNPC}">
         <DataGrid.Columns>
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <controls:ImageButton
-                            Padding="2,0,-2,0"
-                            Command="{Binding SpawnCmd}"
-                            ImageSource="pack://application:,,,/Images/arrow_down.png"
-                            ToolTip="Spawn" />
+                        <StackPanel Orientation="Horizontal">
+                            <controls:ImageButton
+                                Padding="2,0,-2,0"
+                                Command="{Binding SpawnCmd}"
+                                ImageSource="pack://application:,,,/Images/arrow_down.png"
+                                ToolTip="Spawn" />
+
+                            <controls:ImageButton
+                                Margin="4,0"
+                                Padding="2,0,-2,0"
+                                Command="{Binding ToggleFavoriteCmd}"
+                                ImageSource="pack://application:,,,/Images/draw_star.png"
+                                ToolTip="Add to Favorites"
+                                Visibility="{Binding IsFavorite, Converter={StaticResource BTVConverter}, ConverterParameter=!}" />
+                            <controls:ImageButton
+                                Margin="4,0"
+                                Padding="2,0,-2,0"
+                                Command="{Binding ToggleFavoriteCmd}"
+                                ImageSource="pack://application:,,,/Images/star.png"
+                                ToolTip="Remove from Favorites"
+                                Visibility="{Binding IsFavorite, Converter={StaticResource BTVConverter}}" />
+                        </StackPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -75,6 +97,34 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Details.Courage}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Str" SortMemberPath="Details.Strength">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.Strength}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Agi" SortMemberPath="Details.Agility">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.Agility}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Vit" SortMemberPath="Details.Vitality">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.Vitality}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Spc" SortMemberPath="Details.Speech">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Details.Speech}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

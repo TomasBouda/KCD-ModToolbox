@@ -160,8 +160,22 @@ namespace TomLabs.KCDModToolbox.Core.Database
 					CombatLevel = r.AsDict("combat_level").ToString().ToInt(),
 					Courage = r.AsDict("courage").ToString().ToInt(),
 					Faction = r.AsDict("faction").ToString().ToInt(),
-					InitialClothingPresetId = r.AsDict("initial_clothing_preset_id").ToString().ToGuid(),
-					VIPClassId = r.AsDict("soul_vip_class_id").ToString().ToInt()
+					Strength = r.AsDict("str").ToString().ToInt(),
+					Agility = r.AsDict("agi").ToString().ToInt(),
+					Vitality = r.AsDict("vit").ToString().ToInt(),
+					Speech = r.AsDict("spc").ToString().ToInt(),
+					Hearing = r.AsDict("hearing").ToString().ToInt(),
+					Vision = r.AsDict("vision").ToString().ToInt(),
+					Charisma = r.AsDict("charisma").ToString().ToInt(),
+					VIPClassId = r.AsDict("soul_vip_class_id").ToString().ToInt(),
+					InitialClothingPresetId = r.AsDict("initial_clothing_preset_id").ToGuid(),
+					InitialWeaponPresetId = r.AsDict("initial_weapon_preset_id").ToGuid(),
+					InventoryId = r.AsDict("inventory_id").ToGuid(),
+					HairId = r.AsDict("character_hair_id").ToGuid(),
+					BrainId = r.AsDict("brain_id").ToGuid(),
+					HeadId = r.AsDict("character_head_id").ToGuid(),
+					BodyId = r.AsDict("character_body_id").ToGuid(),
+
 				}
 				).ToList();
 

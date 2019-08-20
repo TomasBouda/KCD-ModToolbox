@@ -17,10 +17,17 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			Created = DateTime.Now;
 			CommandText = commandText;
 			IsUserInput = isUserInput;
-			Foreground = GetColorByCommandText(CommandText, IsUserInput);
+			if (IsUserInput)
+			{
+				Foreground = Colors.Yellow;
+			}
+			else
+			{
+				Foreground = GetColorByCommandText(CommandText);
+			}
 		}
 
-		private Color GetColorByCommandText(string commandText, bool isUserInput)
+		private Color GetColorByCommandText(string commandText)
 		{
 			if (commandText.Contains("[VERBOSE]"))
 			{
@@ -34,17 +41,13 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			{
 				return Colors.Cyan;
 			}
-			else if (commandText.Contains("[WARNING]"))
+			else if (commandText.Contains("[WARN]") || commandText.Contains("[WARNING]"))
 			{
 				return Colors.Orange;
 			}
 			else if (commandText.Contains("[ERROR]"))
 			{
 				return Colors.Red;
-			}
-			else if (isUserInput)
-			{
-				return Colors.Yellow;
 			}
 			else
 			{

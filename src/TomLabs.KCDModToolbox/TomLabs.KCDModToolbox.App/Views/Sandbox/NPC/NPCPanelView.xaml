@@ -11,49 +11,63 @@
     mc:Ignorable="d">
     <Grid>
         <GroupBox Header="NPCs List">
+
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                    <TextBox
-                        Height="30"
-                        HorizontalAlignment="Stretch"
-                        VerticalContentAlignment="Center"
-                        FontSize="14"
-                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Return" Command="{Binding SearchCmd}" />
-                        </TextBox.InputBindings>
-                    </TextBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <controls:ImageButton
-                        Grid.Column="1"
-                        Margin="2,0"
-                        ButtonText="Search"
-                        Command="{Binding SearchCmd}"
-                        ImageSource="pack://application:,,,/Images/box_search.png"
-                        ToolTip="Search" />
+                        <local:NPCSearchView DataContext="{Binding}" />
+
+                        <controls:ImageButton
+                            Grid.Column="1"
+                            Margin="2,2"
+                            VerticalAlignment="Top"
+                            ButtonText="Search"
+                            Command="{Binding SearchCmd}"
+                            ImageSource="pack://application:,,,/Images/box_search.png"
+                            ToolTip="Search" />
+                    </Grid>
+
+                    <local:NPCGridView Grid.Row="1" />
+
+                    <StatusBar Grid.Row="2" Background="White">
+                        <StatusBarItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Rows: " />
+                                <TextBlock Text="{Binding FilteredNPCs.Count}" />
+                            </StackPanel>
+                        </StatusBarItem>
+                    </StatusBar>
                 </Grid>
 
-                <local:NPCGridView Grid.Row="1" />
+                <GridSplitter
+                    Grid.Column="1"
+                    Width="5"
+                    HorizontalAlignment="Stretch"
+                    Background="LightGray" />
 
-                <StatusBar Grid.Row="2" Background="White">
-                    <StatusBarItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Rows: " />
-                            <TextBlock Text="{Binding FilteredNPCs.Count}" />
-                        </StackPanel>
-                    </StatusBarItem>
-                </StatusBar>
+                <TabControl Grid.Column="2">
+                    <TabItem Header="Details">
+                        <local:NPCView DataContext="{Binding SelectedNPC, Mode=OneWay}" />
+                    </TabItem>
+                    <TabItem Header="Dules" />
+                </TabControl>
             </Grid>
         </GroupBox>
     </Grid>
