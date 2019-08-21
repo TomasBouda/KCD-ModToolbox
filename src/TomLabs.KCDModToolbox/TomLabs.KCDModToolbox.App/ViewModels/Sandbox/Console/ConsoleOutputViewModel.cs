@@ -132,6 +132,7 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console
 			Entries.Clear();
 			CommandsCache.Clear();
 			CurrentCommand = null;
+			CommandBuilder.Clear();
 		}
 
 		public bool HandleSpecialCommand(string commandText)

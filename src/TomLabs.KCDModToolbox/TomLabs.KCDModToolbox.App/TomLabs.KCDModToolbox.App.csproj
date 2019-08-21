@@ -9,6 +9,7 @@
     <Authors>Tomas Bouda</Authors>
     <Product>TomLabs.KCDModToolbox</Product>
     <PackageProjectUrl>https://github.com/TomasBouda/KCD-ModToolbox</PackageProjectUrl>
+    <AssemblyName>KCDModToolbox</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
     <None Remove="Images\broom.png" />
     <None Remove="Images\draw_star.png" />
     <None Remove="Images\heart.png" />
+    <None Remove="Images\kcd_map.jpg" />
     <None Remove="Images\ruby_add.png" />
     <None Remove="Images\ruby_delete.png" />
     <None Remove="Images\speedometer.png" />
@@ -53,6 +55,7 @@
     <Resource Include="Images\broom.png" />
     <Resource Include="Images\draw_star.png" />
     <Resource Include="Images\heart.png" />
+    <Resource Include="Images\kcd_map.jpg" />
     <Resource Include="Images\ruby_add.png" />
     <Resource Include="Images\ruby_delete.png" />
     <Resource Include="Images\speedometer.png" />

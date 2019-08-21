@@ -2,6 +2,14 @@
 {
 	public static class CommandBuilder
 	{
+		/// <summary>
+		/// Clears bridge file invoke_command.txt
+		/// </summary>
+		public static void Clear()
+		{
+			ScriptInjector.Instance.Inject("");
+		}
+
 		public static Command GetTime()
 		{
 			return new Command("cheat_get_time", @"time=(?<hours>\d+):(?<minutes>\d+):(?<seconds>\d+)");
@@ -55,6 +63,11 @@
 		public static Command SpawnNpc(string id, int distance = 5, int count = 1)
 		{
 			return new Command($"cheat_spawn_npc token:{id} distance:{distance} count:{count}");
+		}
+
+		public static Command TeleportPlayer(int x, int y, int z)
+		{
+			return new Command($"cheat_teleport x:{x} y:{y} z:{z}");
 		}
 	}
 }

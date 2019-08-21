@@ -6,6 +6,7 @@
     xmlns:con="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.Console"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TomLabs.KCDModToolbox.App.Views"
+    xmlns:locations="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.Locations"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:npc="clr-namespace:TomLabs.KCDModToolbox.App.Views.Sandbox.NPC"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
@@ -27,6 +28,9 @@
             <TabControl>
                 <TabItem Header="NPCs">
                     <npc:NPCPanelView DataContext="{Binding NPCPanel}" />
+                </TabItem>
+                <TabItem Header="Teleport">
+                    <locations:LocationsPanelView DataContext="{Binding LocationsPanel}" />
                 </TabItem>
                 <TabItem Header="Buffs">
                     <buffs:BuffsPanelView DataContext="{Binding BuffsPanel}" />

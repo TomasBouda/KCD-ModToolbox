@@ -32,6 +32,8 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 		public bool IsInitialized { get; set; }
 
+		public ELocalizations LocalizationLanguage { get; private set; }
+
 		private static DataLoader _instance;
 
 		public static DataLoader Instance
@@ -51,11 +53,12 @@ namespace TomLabs.KCDModToolbox.Core.Database
 		/// <summary>
 		/// Sets paths to Tables.pak and working directory where databse will be extracted.
 		/// </summary>
-		public void SetPaths(string kcdDirectory, string workingDirectory)
+		public void SetPaths(string kcdDirectory, string workingDirectory, ELocalizations locLanguage)
 		{
 			KCDDirectory = kcdDirectory;
 			DbFilePath = $@"{KCDDirectory}Data\Tables.pak";
 			WorkingDirectory = workingDirectory;
+			LocalizationLanguage = locLanguage;
 		}
 
 		/// <summary>
@@ -76,10 +79,9 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			}
 
 			// Add english localization
-			string localizationsDir = $@"{WorkingDirectory}\Localizations";
-			Directory.Delete(localizationsDir, true);
+			string localizationsDir = $@"{WorkingDirectory}\Localizations_{LocalizationLanguage.ToString().Substring(0, 3).ToLower()}";
 			Directory.CreateDirectory(localizationsDir);
-			ZipFile.ExtractToDirectory($@"{KCDDirectory}\Localization\English_xml.pak", localizationsDir);
+			ZipFile.ExtractToDirectory($@"{KCDDirectory}\Localization\{LocalizationLanguage}_xml.pak", localizationsDir);
 
 			Database = new DatabaseDescriptor(WorkingDirectory, localizationsDir);
 
