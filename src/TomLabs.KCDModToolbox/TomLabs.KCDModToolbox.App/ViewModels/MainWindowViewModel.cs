@@ -8,7 +8,6 @@ namespace TomLabs.KCDModToolbox.App.ViewModels
 	public class MainWindowViewModel : BaseViewModel
 	{
 		private string KCDDirectory { get; set; }
-		private string DbFilePath { get; set; }
 		private string DbWorkingDirectory { get; set; } = AppDomain.CurrentDomain.BaseDirectory + "dbCache";
 
 		public AdminPanelViewModel AdminPanel { get; set; }

@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using TomLabs.KCDModToolbox.Core.Database.Buffs;
+using TomLabs.KCDModToolbox.Core.Database.Items;
 using TomLabs.KCDModToolbox.Core.Database.Souls;
 using TomLabs.KCDModToolbox.Core.Extensions;
 using TomLabs.Shadowgem.Extensions.String;
@@ -78,8 +79,12 @@ namespace TomLabs.KCDModToolbox.Core.Database
 				File.Delete(tblFile);
 			}
 
-			// Add english localization
+			// Add localization
 			string localizationsDir = $@"{WorkingDirectory}\Localizations_{LocalizationLanguage.ToString().Substring(0, 3).ToLower()}";
+			if (Directory.Exists(localizationsDir))
+			{
+				Directory.Delete(localizationsDir, true);
+			}
 			Directory.CreateDirectory(localizationsDir);
 			ZipFile.ExtractToDirectory($@"{KCDDirectory}\Localization\{LocalizationLanguage}_xml.pak", localizationsDir);
 
@@ -102,6 +107,11 @@ namespace TomLabs.KCDModToolbox.Core.Database
 		public IDictionary<string, string> GetSoulLocalizations()
 		{
 			return Database.GetLocalizationTable("text_ui_soul")?.Rows;
+		}
+
+		public IDictionary<string, string> GetItemLocalizations()
+		{
+			return Database.GetLocalizationTable("text_ui_items")?.Rows;
 		}
 
 		public List<BuffClass> GetBuffClasses()
@@ -153,7 +163,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 				).ToList();
 		}
 
-		public List<Soul> GetSouls()
+		public List<Soul> GetSouls(bool withRelations = false)
 		{
 			var table = Database.GetTable("soul", false).LoadTableData();
 			var souls = table.Rows.Select(r =>
@@ -183,19 +193,83 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 			var vSoulCharData = GetVSoulCharacterData();
 			var localizations = GetSoulLocalizations();
+			var weapon2weaponPresets = GetWeapon2WeaponPresets();
 
 			souls.ForEach(s =>
 			{
 				s.UIName = vSoulCharData.FirstOrDefault(l => l.Id == s.Id).UIName;
 				s.LocalizedName = localizations.FirstOrDefault(l => l.Key == s.UIName).Value;
+				if (withRelations)
+				{
+					s.InitialWeaponPreset = weapon2weaponPresets.FirstOrDefault(p => p.WeaponPresetId == s.InitialWeaponPresetId);
+				}
 			});
 
 			return souls;
 		}
 
-		public async Task<List<Soul>> GetSoulsAsync()
+		public async Task<List<Soul>> GetSoulsAsync(bool withRelations = false)
 		{
-			return await Task.Run(GetSouls);
+			return await Task.Run(() => GetSouls(withRelations));
+		}
+
+		public List<Item> GetItems()
+		{
+			var table = Database.GetTable("item", false).LoadTableData();
+			var items = table.Rows.Select(r =>
+			   new Item(
+				   r.AsDict("item_id").ToGuid(),
+				   r.AsDict("item_name").ToString())
+				).ToList();
+
+			var localizations = GetItemLocalizations();
+
+			items.ForEach(i =>
+			{
+				i.LocalizedName = localizations.FirstOrDefault(l => l.Key == $"ui_in_{i.Name}").Value;
+			});
+
+			return items;
+		}
+
+		public List<Weapon2WeaponPreset> GetWeapon2WeaponPresets()
+		{
+			var table = Database.GetTable("weapon2weapon_preset", false).LoadTableData();
+			var presets = table.Rows.Select(r =>
+			   new Weapon2WeaponPreset(
+				   r.AsDict("item_id").ToGuid(),
+				   r.AsDict("weapon_preset_id").ToGuid())
+				).ToList();
+
+			var items = GetItems();
+
+			presets.ForEach(p =>
+			{
+				p.Item = items.FirstOrDefault(i => i.Id == p.ItemId);
+			});
+
+			return presets;
+		}
+
+		public List<Inventory2InventoryPreset> GetInventory2InventoryPresets()
+		{
+			var table = Database.GetTable("inventory2inventory_preset", false).LoadTableData();
+			return table.Rows.Select(r =>
+			   new Inventory2InventoryPreset(
+				   r.AsDict("inventory_id").ToGuid(),
+				   r.AsDict("inventory_preset_id").ToGuid())
+				).ToList();
+		}
+
+		public List<Inventory2Item> GetInventory2Item2()
+		{
+			var table = Database.GetTable("inventory2item", false).LoadTableData();
+			return table.Rows.Select(r =>
+				   new Inventory2Item(r.AsDict("inventory_id").ToGuid(), r.AsDict("item_id").ToGuid())
+				   {
+					   Amount = r.AsDict("amount").ToString().ToInt()
+				   }
+				).ToList();
 		}
 	}
 }

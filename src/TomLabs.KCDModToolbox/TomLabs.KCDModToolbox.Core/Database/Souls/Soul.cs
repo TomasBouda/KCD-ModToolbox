@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
+using TomLabs.KCDModToolbox.Core.Database.Items;
 
 namespace TomLabs.KCDModToolbox.Core.Database.Souls
 {
-	public class Soul : GuidEntity
+	public class Soul : GuidEntity, IWithRelations
 	{
 		public string Name { get; set; }
 
@@ -33,12 +35,14 @@ namespace TomLabs.KCDModToolbox.Core.Database.Souls
 		public double Scale { get; set; }
 
 		public Guid InitialClothingPresetId { get; set; }
+
 		public Guid InitialWeaponPresetId { get; set; }
+		public Weapon2WeaponPreset InitialWeaponPreset { get; set; }
+
 		public Guid InventoryId { get; set; }
 		public Guid HeadId { get; set; }
 		public Guid HairId { get; set; }
 		public Guid BrainId { get; set; }
-
 		public Guid BodyId { get; set; }
 
 		public int VIPClassId { get; set; }
@@ -46,6 +50,11 @@ namespace TomLabs.KCDModToolbox.Core.Database.Souls
 		public Soul(string id, string name) : base(id)
 		{
 			Name = name;
+		}
+
+		public void LoadRelations()
+		{
+			InitialWeaponPreset = DataLoader.Instance.GetWeapon2WeaponPresets().FirstOrDefault(p => p.WeaponPresetId == InitialWeaponPresetId);
 		}
 	}
 }
