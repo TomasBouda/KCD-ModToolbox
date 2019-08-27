@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace TomLabs.KCDModToolbox.Core.Database
+namespace TomLabs.KCDModToolbox.Core.Database.Entities
 {
-	public class GuidEntity
+	public abstract class GuidEntity : Entity
 	{
 		public Guid Id { get; set; }
 

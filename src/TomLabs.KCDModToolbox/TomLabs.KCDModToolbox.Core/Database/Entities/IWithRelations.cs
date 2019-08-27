@@ -1,4 +1,4 @@
-﻿namespace TomLabs.KCDModToolbox.Core.Database
+﻿namespace TomLabs.KCDModToolbox.Core.Database.Entities
 {
 	public interface IWithRelations
 	{

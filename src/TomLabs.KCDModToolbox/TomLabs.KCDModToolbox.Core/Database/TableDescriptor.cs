@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using TomLabs.KCDModToolbox.Core.Database.Entities;
 
 namespace TomLabs.KCDModToolbox.Core.Database
 {
@@ -16,6 +17,8 @@ namespace TomLabs.KCDModToolbox.Core.Database
 		public List<Column> Columns { get; set; } = new List<Column>();
 
 		public List<ExpandoObject> Rows { get; set; } = new List<ExpandoObject>();
+
+		public List<object> Entities { get; set; }
 
 		public string Name { get; set; }
 
@@ -58,19 +61,27 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			return this;
 		}
 
-		public TableDescriptor LoadTableData()
+		public TableDescriptor LoadTableData(bool forceReload = false)
 		{
-			XmlDocument xml = new XmlDocument();
-			Rows.Clear();
-			xml.Load(XmlPath);
-
-			XmlNode rows = xml.DocumentElement.SelectSingleNode("//rows");
-			if (rows?.ChildNodes != null)
+			if (forceReload || Rows?.Count == 0)
 			{
-				LoadRows(rows.ChildNodes);
+				XmlDocument xml = new XmlDocument();
+				Rows.Clear();
+				xml.Load(XmlPath);
+
+				XmlNode rows = xml.DocumentElement.SelectSingleNode("//rows");
+				if (rows?.ChildNodes != null)
+				{
+					LoadRows(rows.ChildNodes);
+				}
 			}
 
 			return this;
+		}
+
+		public List<T> AsEntities<T>() where T : IEntity
+		{
+			return Rows.Select(typeof(T).GetProperty("Selector").GetValue(null) as Func<ExpandoObject, T>).ToList();
 		}
 
 		private void LoadRows(XmlNodeList nodeList)

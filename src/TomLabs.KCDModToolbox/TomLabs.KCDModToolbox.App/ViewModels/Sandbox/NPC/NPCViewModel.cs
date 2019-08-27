@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using TomLabs.KCDModToolbox.Core.Database.Souls;
+using TomLabs.KCDModToolbox.Core.Database.Entities.Souls;
 using TomLabs.KCDModToolbox.Core.Sandbox;
 using TomLabs.WPF.Tools;
 using TomLabs.WPF.Tools.Commands;

@@ -1,5 +1,6 @@
 ﻿using TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Buffs;
 using TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Console;
+using TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Items;
 using TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Locations;
 using TomLabs.KCDModToolbox.App.ViewModels.Sandbox.NPC;
 using TomLabs.KCDModToolbox.App.ViewModels.Sandbox.Time;
@@ -17,6 +18,8 @@ namespace TomLabs.KCDModToolbox.App.ViewModels.Sandbox
 		public BuffsPanelViewModel BuffsPanel { get; set; } = new BuffsPanelViewModel();
 
 		public NPCPanelViewModel NPCPanel { get; set; } = new NPCPanelViewModel();
+
+		public ItemsPanelViewModel ItemsPanel { get; set; } = new ItemsPanelViewModel();
 
 		public LocationsPanelViewModel LocationsPanel { get; set; } = new LocationsPanelViewModel();
 

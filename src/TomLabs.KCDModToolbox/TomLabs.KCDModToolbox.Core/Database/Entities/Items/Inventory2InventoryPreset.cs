@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace TomLabs.KCDModToolbox.Core.Database.Items
+namespace TomLabs.KCDModToolbox.Core.Database.Entities.Items
 {
-	public class Inventory2InventoryPreset
+	public class Inventory2InventoryPreset : Entity
 	{
 		public Guid InventoryId { get; set; }
 

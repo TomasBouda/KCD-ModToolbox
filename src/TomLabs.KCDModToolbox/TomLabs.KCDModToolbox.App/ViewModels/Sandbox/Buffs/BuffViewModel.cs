@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using TomLabs.KCDModToolbox.Core.Database.Buffs;
+using TomLabs.KCDModToolbox.Core.Database.Entities.Buffs;
 using TomLabs.KCDModToolbox.Core.Sandbox;
 using TomLabs.WPF.Tools;
 using TomLabs.WPF.Tools.Commands;

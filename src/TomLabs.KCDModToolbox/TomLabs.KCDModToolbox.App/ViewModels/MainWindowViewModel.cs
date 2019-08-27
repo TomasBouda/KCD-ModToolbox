@@ -1,6 +1,7 @@
 ﻿using System;
 using TomLabs.KCDModToolbox.App.ViewModels.Sandbox;
 using TomLabs.KCDModToolbox.Core.Database;
+using TomLabs.KCDModToolbox.Core.Database.Localizations;
 using TomLabs.WPF.Tools;
 
 namespace TomLabs.KCDModToolbox.App.ViewModels

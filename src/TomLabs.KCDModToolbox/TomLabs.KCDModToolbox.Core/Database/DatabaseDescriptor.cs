@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using TomLabs.KCDModToolbox.Core.Database.Localizations;
 
 namespace TomLabs.KCDModToolbox.Core.Database
 {
@@ -30,7 +31,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			LocalizationsDir = localizationsDir;
 		}
 
-		public TableDescriptor GetTable(string tableName, bool loadRelations = true)
+		public TableDescriptor GetTable(string tableName, bool loadRelations = false)
 		{
 			var table = this.Tables.FirstOrDefault(t => t.Name == tableName);
 

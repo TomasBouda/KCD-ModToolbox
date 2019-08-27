@@ -70,8 +70,4 @@
     </Page>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\Sandbox\Items\" />
-  </ItemGroup>
-
 </Project>

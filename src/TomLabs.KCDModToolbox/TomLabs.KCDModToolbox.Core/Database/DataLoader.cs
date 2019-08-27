@@ -3,9 +3,10 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using TomLabs.KCDModToolbox.Core.Database.Buffs;
-using TomLabs.KCDModToolbox.Core.Database.Items;
-using TomLabs.KCDModToolbox.Core.Database.Souls;
+using TomLabs.KCDModToolbox.Core.Database.Entities.Buffs;
+using TomLabs.KCDModToolbox.Core.Database.Entities.Items;
+using TomLabs.KCDModToolbox.Core.Database.Entities.Souls;
+using TomLabs.KCDModToolbox.Core.Database.Localizations;
 using TomLabs.KCDModToolbox.Core.Extensions;
 using TomLabs.Shadowgem.Extensions.String;
 
@@ -50,6 +51,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			}
 		}
 
+		private LocalizationsLoader Localizations { get; set; }
 
 		/// <summary>
 		/// Sets paths to Tables.pak and working directory where databse will be extracted.
@@ -89,7 +91,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			ZipFile.ExtractToDirectory($@"{KCDDirectory}\Localization\{LocalizationLanguage}_xml.pak", localizationsDir);
 
 			Database = new DatabaseDescriptor(WorkingDirectory, localizationsDir);
-
+			Localizations = new LocalizationsLoader(_database); // Can't use prop because of custom getter
 			IsInitialized = true;
 		}
 
@@ -104,39 +106,12 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			}
 		}
 
-		public IDictionary<string, string> GetSoulLocalizations()
-		{
-			return Database.GetLocalizationTable("text_ui_soul")?.Rows;
-		}
-
-		public IDictionary<string, string> GetItemLocalizations()
-		{
-			return Database.GetLocalizationTable("text_ui_items")?.Rows;
-		}
-
-		public List<BuffClass> GetBuffClasses()
-		{
-			var table = Database.GetTable("buff_class", false).LoadTableData();
-			return table.Rows.Select(r =>
-				new BuffClass(
-					r.AsDict("buff_class_id").ToString(),
-					r.AsDict("buff_class_name").ToString())
-				).ToList();
-		}
-
 		public List<Buff> GetBuffs()
 		{
-			var table = Database.GetTable("buff", false).LoadTableData();
-			var buffs = table.Rows.Select(r =>
-				new Buff(r.AsDict("buff_id").ToString(), r.AsDict("buff_name").ToString(), r.AsDict("buff_class_id").ToString())
-				{
-					UIName = r.AsDict("buff_ui_name").ToString(),
-					DescriptionKey = r.AsDict("buff_desc").ToString(),
-				}
-				).ToList();
+			var buffs = Database.GetTable(Buff.TABLE_NAME, false).LoadTableData().AsEntities<Buff>();
 
 			var buffClasses = GetBuffClasses();
-			var localizations = GetSoulLocalizations();
+			var localizations = Localizations.GetSoulLocalizations();
 
 			buffs.ForEach(b =>
 			{
@@ -153,46 +128,22 @@ namespace TomLabs.KCDModToolbox.Core.Database
 			return await Task.Run(GetBuffs);
 		}
 
+		public List<BuffClass> GetBuffClasses()
+		{
+			return Database.GetTable(BuffClass.TABLE_NAME, false).LoadTableData().AsEntities<BuffClass>();
+		}
+
 		public List<VSoulCharacterData> GetVSoulCharacterData()
 		{
-			var table = Database.GetTable("v_soul_character_data", false).LoadTableData();
-			return table.Rows.Select(r =>
-				new VSoulCharacterData(
-					r.AsDict("soul_id").ToString(),
-					r.AsDict("name_string_id").ToString())
-				).ToList();
+			return Database.GetTable(VSoulCharacterData.TABLE_NAME, false).LoadTableData().AsEntities<VSoulCharacterData>();
 		}
 
 		public List<Soul> GetSouls(bool withRelations = false)
 		{
-			var table = Database.GetTable("soul", false).LoadTableData();
-			var souls = table.Rows.Select(r =>
-				new Soul(r.AsDict("soul_id").ToString(), r.AsDict("soul_name").ToString())
-				{
-					CombatLevel = r.AsDict("combat_level").ToString().ToInt(),
-					Courage = r.AsDict("courage").ToString().ToInt(),
-					Faction = r.AsDict("faction").ToString().ToInt(),
-					Strength = r.AsDict("str").ToString().ToInt(),
-					Agility = r.AsDict("agi").ToString().ToInt(),
-					Vitality = r.AsDict("vit").ToString().ToInt(),
-					Speech = r.AsDict("spc").ToString().ToInt(),
-					Hearing = r.AsDict("hearing").ToString().ToInt(),
-					Vision = r.AsDict("vision").ToString().ToInt(),
-					Charisma = r.AsDict("charisma").ToString().ToInt(),
-					VIPClassId = r.AsDict("soul_vip_class_id").ToString().ToInt(),
-					InitialClothingPresetId = r.AsDict("initial_clothing_preset_id").ToGuid(),
-					InitialWeaponPresetId = r.AsDict("initial_weapon_preset_id").ToGuid(),
-					InventoryId = r.AsDict("inventory_id").ToGuid(),
-					HairId = r.AsDict("character_hair_id").ToGuid(),
-					BrainId = r.AsDict("brain_id").ToGuid(),
-					HeadId = r.AsDict("character_head_id").ToGuid(),
-					BodyId = r.AsDict("character_body_id").ToGuid(),
-
-				}
-				).ToList();
+			var souls = Database.GetTable(Soul.TABLE_NAME, false).LoadTableData().AsEntities<Soul>();
 
 			var vSoulCharData = GetVSoulCharacterData();
-			var localizations = GetSoulLocalizations();
+			var localizations = Localizations.GetSoulLocalizations();
 			var weapon2weaponPresets = GetWeapon2WeaponPresets();
 
 			souls.ForEach(s =>
@@ -215,14 +166,9 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 		public List<Item> GetItems()
 		{
-			var table = Database.GetTable("item", false).LoadTableData();
-			var items = table.Rows.Select(r =>
-			   new Item(
-				   r.AsDict("item_id").ToGuid(),
-				   r.AsDict("item_name").ToString())
-				).ToList();
+			var items = Database.GetTable("item", false).LoadTableData().AsEntities<Item>();
 
-			var localizations = GetItemLocalizations();
+			var localizations = Localizations.GetItemLocalizations();
 
 			items.ForEach(i =>
 			{
@@ -234,12 +180,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 
 		public List<Weapon2WeaponPreset> GetWeapon2WeaponPresets()
 		{
-			var table = Database.GetTable("weapon2weapon_preset", false).LoadTableData();
-			var presets = table.Rows.Select(r =>
-			   new Weapon2WeaponPreset(
-				   r.AsDict("item_id").ToGuid(),
-				   r.AsDict("weapon_preset_id").ToGuid())
-				).ToList();
+			var presets = Database.GetTable(Weapon2WeaponPreset.TABLE_NAME, false).LoadTableData().AsEntities<Weapon2WeaponPreset>();
 
 			var items = GetItems();
 

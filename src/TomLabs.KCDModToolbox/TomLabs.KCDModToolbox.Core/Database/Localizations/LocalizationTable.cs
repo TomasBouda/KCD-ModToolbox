@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
-namespace TomLabs.KCDModToolbox.Core.Database
+namespace TomLabs.KCDModToolbox.Core.Database.Localizations
 {
 	public class LocalizationTable
 	{
