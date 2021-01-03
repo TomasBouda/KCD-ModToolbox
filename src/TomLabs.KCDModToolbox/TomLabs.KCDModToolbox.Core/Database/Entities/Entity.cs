@@ -1,10 +1,10 @@
 ﻿namespace TomLabs.KCDModToolbox.Core.Database.Entities
 {
-	public abstract class Entity
+	public abstract class Entity : IEntity
 	{
-		public void Save()
+		public virtual void Save()
 		{
-			// TODO
+
 		}
 	}
 }

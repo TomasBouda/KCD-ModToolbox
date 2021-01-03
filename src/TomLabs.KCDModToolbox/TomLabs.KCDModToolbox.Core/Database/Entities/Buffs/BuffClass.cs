@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Dynamic;
+using TomLabs.KCDModToolbox.Core.Database.Attributes;
 using TomLabs.KCDModToolbox.Core.Extensions;
 
 namespace TomLabs.KCDModToolbox.Core.Database.Entities.Buffs
 {
-	public class BuffClass : Entity, IEntity
+	public class BuffClass : Entity
 	{
 		public const string TABLE_NAME = "buff_class";
 
+		[Key]
 		public int Id { get; set; }
 
 		public string Name { get; set; }
@@ -30,6 +32,11 @@ namespace TomLabs.KCDModToolbox.Core.Database.Entities.Buffs
 		{
 			Id = id;
 			Name = name;
+		}
+
+		public override void Save()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

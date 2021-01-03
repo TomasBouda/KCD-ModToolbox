@@ -4,7 +4,7 @@ using TomLabs.KCDModToolbox.Core.Extensions;
 
 namespace TomLabs.KCDModToolbox.Core.Database.Entities.Souls
 {
-	public class VSoulCharacterData : GuidEntity, IEntity
+	public class VSoulCharacterData : GuidEntity
 	{
 		public const string TABLE_NAME = "v_soul_character_data";
 

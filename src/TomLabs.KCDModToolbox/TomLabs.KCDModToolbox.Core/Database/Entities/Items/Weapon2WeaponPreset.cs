@@ -4,7 +4,7 @@ using TomLabs.KCDModToolbox.Core.Extensions;
 
 namespace TomLabs.KCDModToolbox.Core.Database.Entities.Items
 {
-	public class Weapon2WeaponPreset : Entity, IEntity
+	public class Weapon2WeaponPreset : Entity
 	{
 		public const string TABLE_NAME = "weapon2weapon_preset";
 

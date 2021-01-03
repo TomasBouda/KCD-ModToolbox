@@ -4,7 +4,7 @@ using TomLabs.KCDModToolbox.Core.Extensions;
 
 namespace TomLabs.KCDModToolbox.Core.Database.Entities.Items
 {
-	public class Item : GuidEntity, IEntity
+	public class Item : GuidEntity
 	{
 		public const string TABLE_NAME = "item";
 

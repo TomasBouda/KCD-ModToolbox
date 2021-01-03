@@ -19,6 +19,10 @@ namespace TomLabs.KCDModToolbox.App.ViewModels
 
 			DataLoader.Instance.SetPaths(KCDDirectory, DbWorkingDirectory, ELocalizations.Czech);
 			AdminPanel = new AdminPanelViewModel(KCDDirectory);
+
+			//var test = DataLoader.Instance.GetBuffs()[0];
+			//test.Name += "_test";
+			//test.Save();
 		}
 	}
 }

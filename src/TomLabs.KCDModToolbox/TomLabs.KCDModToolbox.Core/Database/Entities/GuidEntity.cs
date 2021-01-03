@@ -1,10 +1,12 @@
 ﻿using System;
+using TomLabs.KCDModToolbox.Core.Database.Attributes;
 
 namespace TomLabs.KCDModToolbox.Core.Database.Entities
 {
 	public abstract class GuidEntity : Entity
 	{
-		public Guid Id { get; set; }
+		[Key]
+		public virtual Guid Id { get; set; }
 
 		public GuidEntity()
 		{

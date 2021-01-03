@@ -59,7 +59,7 @@ namespace TomLabs.KCDModToolbox.Core.Database
 		public void SetPaths(string kcdDirectory, string workingDirectory, ELocalizations locLanguage)
 		{
 			KCDDirectory = kcdDirectory;
-			DbFilePath = $@"{KCDDirectory}Data\Tables.pak";
+			DbFilePath = $@"{KCDDirectory}\Data\Tables.pak";
 			WorkingDirectory = workingDirectory;
 			LocalizationLanguage = locLanguage;
 		}

@@ -57,7 +57,7 @@ function bootloader:execute_commands()
 	local success, command = pcall(function() return bootloader:get_command() end)
 
 	if not success then
-		bootloader:logError("Failed to load command. %s", command)
+		bootloader:logError("Failed to load command!")
 	else
 		if command ~= "" then
 			success, message = pcall(function(cmd) return bootloader:execute_command(command) end);
@@ -109,6 +109,6 @@ UIAction.RegisterActionListener(bootloader, "", "", "uiActionListener")
 -- end
 -- UIAction.RegisterEventSystemListener(bootloader, "", "", "uiEventSystemListener")
 
-bootloader:load_mods()
+-- bootloader:load_mods()
 
 bootloader:logInfo("KCD Bootloader initialized")
